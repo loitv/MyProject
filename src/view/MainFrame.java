@@ -1,18 +1,19 @@
+package view;
 import java.awt.BorderLayout;
 import java.awt.Container;
-import java.awt.EventQueue;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-
 import javax.swing.*;
 
 public class MainFrame extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JMenuBar menuBar;
 	private JMenu menu;
-	private JMenuItem login, logout, exit, aboutUs, searchBook;
+	private JMenuItem login, signUp;
 
 	public MainFrame() {
 		JPanel panel = new JPanel(new BorderLayout());
@@ -22,7 +23,11 @@ public class MainFrame extends JFrame {
 		panel.add(lb, BorderLayout.CENTER);
 
 		menuBar = new JMenuBar();
-		menu = new JMenu("Login");
+		menu = new JMenu("Account");
+		login = new JMenuItem("Login");
+		signUp = new JMenuItem("Sign up");
+		menu.add(login);
+		menu.add(signUp);
 		menuBar.add(menu);
 		
 		menu = new JMenu("Category");
@@ -56,8 +61,12 @@ public class MainFrame extends JFrame {
 	public void setLoginActionListener(ActionListener listener) {
 		this.login.addActionListener(listener);
 	}
-
-	public static void main(String[] args) {
-		new MainFrame();
+	
+	public void setSignUpActionListener (ActionListener listener) {
+		this.signUp.addActionListener(listener);
 	}
+
+//	public static void main(String[] args) {
+//		new MainFrame();
+//	}
 }

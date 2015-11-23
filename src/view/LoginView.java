@@ -1,11 +1,18 @@
+package view;
+
 import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.*;
 
-public class JLogin extends JFrame {
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
+public class LoginView extends JFrame {
 
 	/**
 	 * 
@@ -16,7 +23,7 @@ public class JLogin extends JFrame {
 	private JPasswordField pwField;
 	private JButton btnLogin;
 
-	public JLogin() {
+	public LoginView() {
 		JPanel loginPanel = new JPanel(new GridLayout(2, 2, 10, 5));
 		lbUser = new JLabel("User");
 		tfUser = new JTextField(10);
@@ -27,21 +34,21 @@ public class JLogin extends JFrame {
 		loginPanel.add(lbPassword);
 		loginPanel.add(pwField);
 		btnLogin = new JButton("Login");
-		btnLogin.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				String userName = getUser();
-				String password = getPassword();
-				if (userName.equals("loitv") & password.equals("loi123")) {
-					JOptionPane.showMessageDialog(null, "LOGIN SUCESSFULLY");
-					closeForm();
-				} else {
-					JOptionPane.showMessageDialog(null, "LOGIN UNSUCESSFULLY");
-				}
-			}
-
-		});
+//		btnLogin.addActionListener(new ActionListener() {
+//
+//			@Override
+//			public void actionPerformed(ActionEvent arg0) {
+//				String userName = getUser();
+//				String password = getPassword();
+//				if (userName.equals("loitv") & password.equals("loi123")) {
+//					JOptionPane.showMessageDialog(null, "LOGIN SUCESSFULLY");
+//					closeForm();
+//				} else {
+//					JOptionPane.showMessageDialog(null, "LOGIN UNSUCESSFULLY");
+//				}
+//			}
+//
+//		});
 		// Setup the content-pane of JFrame in BorderLayout
 		Container cp = this.getContentPane();
 		cp.setLayout(new FlowLayout());
@@ -50,9 +57,15 @@ public class JLogin extends JFrame {
 
 		setTitle("Log in");
 		setSize(280, 130);
+		setLocationRelativeTo(null);
 		setVisible(true);
 		// setResizable(false);
 
+	}
+	
+	//Tao su kien cho nut nhan Login
+	public void setBtnLoginActionListener(ActionListener listener) {
+		this.btnLogin.addActionListener(listener);
 	}
 
 	public String getUser() {
@@ -69,7 +82,7 @@ public class JLogin extends JFrame {
 	}
 
 	public static void main(String[] args) {
-		new JLogin();
+		new LoginView();
 	}
 
 }

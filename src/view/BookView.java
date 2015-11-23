@@ -23,7 +23,7 @@ public class BookView extends JFrame {
 	public BookView() {
 		super("Book Management");
 		setSize(970, 600);
-		setLayout(new BorderLayout());
+		setLayout(new BorderLayout(5, 5));
 
 		lbISBN = new JLabel("ISBN");
 		lbISBN.setForeground(Color.blue);
@@ -93,6 +93,7 @@ public class BookView extends JFrame {
 		panel3.add(btnDelete);
 		add(panel3, BorderLayout.SOUTH);
 
+		setLocationRelativeTo(null);
 		setVisible(true);
 	}
 
