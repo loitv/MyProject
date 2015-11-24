@@ -13,7 +13,7 @@ public class MainFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JMenuBar menuBar;
 	private JMenu menu;
-	private JMenuItem login, signUp;
+	private JMenuItem login, signUp, logout;
 
 	public MainFrame() {
 		JPanel panel = new JPanel(new BorderLayout());
@@ -58,6 +58,10 @@ public class MainFrame extends JFrame {
 		setResizable(false);
 	}
 	
+	public MainFrame(int number) {
+		
+	}
+	
 	public void setLoginActionListener(ActionListener listener) {
 		this.login.addActionListener(listener);
 	}
@@ -65,8 +69,24 @@ public class MainFrame extends JFrame {
 	public void setSignUpActionListener (ActionListener listener) {
 		this.signUp.addActionListener(listener);
 	}
+	
+	public void setLogoutAL(ActionListener ls) {
+		this.logout.addActionListener(ls);
+	}
+	
+	// Add user's information into Menu bar
+	public void addAccount() {
+		logout = new JMenuItem("Logout");
+		menu = menuBar.getMenu(0);
+		menu.setText("LOI");
+		menu.remove(0);
+		menu.add(logout);
+		this.validate();
+	}
+	
+	
 
-//	public static void main(String[] args) {
-//		new MainFrame();
-//	}
+	public static void main(String[] args) {
+		new MainFrame();
+	}
 }

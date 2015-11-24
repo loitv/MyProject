@@ -34,21 +34,6 @@ public class LoginView extends JFrame {
 		loginPanel.add(lbPassword);
 		loginPanel.add(pwField);
 		btnLogin = new JButton("Login");
-//		btnLogin.addActionListener(new ActionListener() {
-//
-//			@Override
-//			public void actionPerformed(ActionEvent arg0) {
-//				String userName = getUser();
-//				String password = getPassword();
-//				if (userName.equals("loitv") & password.equals("loi123")) {
-//					JOptionPane.showMessageDialog(null, "LOGIN SUCESSFULLY");
-//					closeForm();
-//				} else {
-//					JOptionPane.showMessageDialog(null, "LOGIN UNSUCESSFULLY");
-//				}
-//			}
-//
-//		});
 		// Setup the content-pane of JFrame in BorderLayout
 		Container cp = this.getContentPane();
 		cp.setLayout(new FlowLayout());
@@ -59,23 +44,34 @@ public class LoginView extends JFrame {
 		setSize(280, 130);
 		setLocationRelativeTo(null);
 		setVisible(true);
-		// setResizable(false);
+		setResizable(false);
 
 	}
-	
-	//Tao su kien cho nut nhan Login
+
+	// Create event for button Login
 	public void setBtnLoginActionListener(ActionListener listener) {
 		this.btnLogin.addActionListener(listener);
 	}
+	
+	public void setTfUserNameActionListener(ActionListener listener) {
+		this.tfUser.addActionListener(listener);
+	}
+	
+	public void setPwFieldActionListener(ActionListener listener) {
+		this.pwField.addActionListener(listener);
+	}
 
+	// get User name
 	public String getUser() {
 		return this.tfUser.getText();
 	}
 
+	// get password
 	public String getPassword() {
 		return (new String(this.pwField.getPassword()));
 	}
-	
+
+	// close Login window
 	public void closeForm() {
 		super.dispose();
 
