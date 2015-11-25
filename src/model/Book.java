@@ -5,7 +5,7 @@ public class Book {
 	private String isbn;
 	private String title;
 	private String category;
-	private String idAuthor;
+	private String author;
 	private double price;
 	private int quantity;
 
@@ -15,11 +15,11 @@ public class Book {
 	}
 
 	// constructor
-	public Book(String isbn, String title, String category, String idAuthor, double price, int quantity) {
+	public Book(String isbn, String title, String category, String author, double price, int quantity) {
 		this.isbn = isbn;
 		this.title = title;
 		this.category = category;
-		this.idAuthor = idAuthor;
+		this.author = author;
 		this.price = price;
 		this.quantity = quantity;
 	}
@@ -48,12 +48,12 @@ public class Book {
 		this.category = category;
 	}
 
-	public String getIdAuthor() {
-		return idAuthor;
+	public String getAuthor() {
+		return author;
 	}
 
-	public void setIdAuthor(String idAuthor) {
-		this.idAuthor = idAuthor;
+	public void setIdAuthor(String author) {
+		this.author = author;
 	}
 
 	public double getPrice() {

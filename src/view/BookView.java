@@ -11,8 +11,8 @@ public class BookView extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	JPanel panel1 = new JPanel();
-	JLabel lbISBN, lbTitle, lbAuthorID, lbCategory, lbPrice, lbQuantity;
-	JTextField tfISBN, tfTitle, tfAuthorID, tfCategory, tfPrice, tfQuantity;
+	JLabel lbISBN, lbTitle, lbAuthor, lbCategory, lbPrice, lbQuantity;
+	JTextField tfISBN, tfTitle, tfAuthor, tfCategory, tfPrice, tfQuantity;
 
 	JScrollPane scrollPanel = new JScrollPane();
 	JTable bookDetails;
@@ -20,6 +20,7 @@ public class BookView extends JFrame {
 	JPanel panel3 = new JPanel();
 	JButton btnAdd, btnEdit, btnDelete;
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public BookView() {
 		super("Book Management");
 		setSize(970, 600);
@@ -29,8 +30,8 @@ public class BookView extends JFrame {
 		lbISBN.setForeground(Color.blue);
 		lbTitle = new JLabel("Title");
 		lbTitle.setForeground(Color.blue);
-		lbAuthorID = new JLabel("Author ID");
-		lbAuthorID.setForeground(Color.blue);
+		lbAuthor = new JLabel("Author");
+		lbAuthor.setForeground(Color.blue);
 		lbCategory = new JLabel("Category");
 		lbCategory.setForeground(Color.blue);
 		lbPrice = new JLabel("Price");
@@ -41,7 +42,7 @@ public class BookView extends JFrame {
 		tfISBN = new JTextField(36);
 		tfTitle = new JTextField(36);
 		tfPrice = new JTextField(36);
-		tfAuthorID = new JTextField(36);
+		tfAuthor = new JTextField(36);
 		tfCategory = new JTextField(36);
 		tfQuantity = new JTextField(36);
 
@@ -53,8 +54,8 @@ public class BookView extends JFrame {
 		panel1.add(tfTitle);
 		panel1.add(lbPrice);
 		panel1.add(tfPrice);
-		panel1.add(lbAuthorID);
-		panel1.add(tfAuthorID);
+		panel1.add(lbAuthor);
+		panel1.add(tfAuthor);
 		panel1.add(lbCategory);
 		panel1.add(tfCategory);
 		panel1.add(lbQuantity);
@@ -68,10 +69,10 @@ public class BookView extends JFrame {
 
 		add(panel1, BorderLayout.NORTH);
 		
-		Vector<String> colsName = new Vector<String>();
+		Vector colsName = new Vector();
 		colsName.addElement("ISBN");
 		colsName.addElement("Tittle");
-		colsName.addElement("Author ID");
+		colsName.addElement("Author");
 		colsName.addElement("Category");
 		colsName.addElement("Price");
 		colsName.addElement("Quantity");

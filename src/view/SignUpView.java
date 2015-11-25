@@ -4,9 +4,7 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 
-import javax.swing.ButtonGroup;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -22,8 +20,6 @@ public class SignUpView extends JFrame{
 	private JLabel lbUserName,lbPassword, lbRePassWord;
 	private JTextField tfUserName;
 	private JPasswordField pwField, rePwField;
-	private ButtonGroup user;
-	private JCheckBox librarian, reader;
 	private JButton btnSignUp;
 	
 	public SignUpView() {
@@ -48,14 +44,9 @@ public class SignUpView extends JFrame{
 		signUpPanel.add(lbRePassWord);
 		signUpPanel.add(rePwField);
 		
-		user = new ButtonGroup();
-		librarian = new JCheckBox("Librarian", false);
-		reader = new JCheckBox("Reader", false);
-		
 		btnSignUp = new JButton("Sign Up");
 		
 		add(signUpPanel);
-		add(user);
 		add(btnSignUp);
 		
 		setVisible(true);

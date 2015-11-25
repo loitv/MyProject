@@ -1,5 +1,6 @@
 package view;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
@@ -13,13 +14,13 @@ public class MainFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JMenuBar menuBar;
 	private JMenu menu;
-	private JMenuItem login, signUp, logout;
+	private JMenuItem login, signUp, logout, searchBook, allBook;
 
 	public MainFrame() {
 		JPanel panel = new JPanel(new BorderLayout());
 		JLabel lb = new JLabel();
 		lb.setIcon(new javax.swing.ImageIcon(getClass().getResource(
-				"/Icon/s3.jpg")));
+				"/Icon/main.jpg")));
 		panel.add(lb, BorderLayout.CENTER);
 
 		menuBar = new JMenuBar();
@@ -30,9 +31,11 @@ public class MainFrame extends JFrame {
 		menu.add(signUp);
 		menuBar.add(menu);
 		
-		menu = new JMenu("Category");
-		JMenuItem serchBook = new JMenuItem("Search Book");
-		menu.add(serchBook);
+		menu = new JMenu("Book");
+		searchBook = new JMenuItem("Search Book");
+		menu.add(searchBook);
+		allBook = new JMenuItem("All Books");
+		menu.add(allBook);
 		menuBar.add(menu);
 		
 		menu = new JMenu("Management");
@@ -74,14 +77,28 @@ public class MainFrame extends JFrame {
 		this.logout.addActionListener(ls);
 	}
 	
-	// Add user's information into Menu bar
-	public void addAccount() {
+	public void setSeachBookAL(ActionListener al) {
+		this.searchBook.addActionListener(al);
+	}
+	
+	public void setAllBookAL(ActionListener al) {
+		this.allBook.addActionListener(al);
+	}
+	
+	// Add user's name into Menu bar
+	public void addAccount(String name) {
 		logout = new JMenuItem("Logout");
 		menu = menuBar.getMenu(0);
-		menu.setText("LOI");
-		menu.remove(0);
+		menu.setText(name);
+		menu.setForeground(Color.RED);
+		menu.remove(login);
+		menu.remove(signUp);
 		menu.add(logout);
 		this.validate();
+	}
+	
+	public JMenuItem getLogin() {
+		return login;
 	}
 	
 	
@@ -89,4 +106,5 @@ public class MainFrame extends JFrame {
 	public static void main(String[] args) {
 		new MainFrame();
 	}
+
 }

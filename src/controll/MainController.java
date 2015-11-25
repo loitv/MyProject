@@ -2,6 +2,9 @@ package controll;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.swing.JOptionPane;
 
@@ -11,47 +14,8 @@ import view.MainFrame;
 public class MainController {
 
 	private MainFrame mainFrame;
-	private LoginController loginCtrl;
 	private LoginView login;
-	private int a;
-
-	public void login() {
-		String userName = login.getUser();
-		String password = login.getPassword();
-		if (userName.equals("111") & password.equals("111")) {
-			a = 2;
-		}
-		if (a == 2) {
-			JOptionPane.showMessageDialog(null, "LOGIN SUCESSFULLY");
-			login.closeForm(); // close login window
-			mainFrame.addAccount(); // add account, logout into menubar
-
-			// create event for logout
-			mainFrame.setLogoutAL(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent arg0) {
-					mainFrame.dispose();
-					new MainController();
-				}
-
-			});
-
-		} else {
-			JOptionPane.showMessageDialog(null, "LOGIN UNSUCESSFULLY");
-		}
-	}
-
-	public void afterLogin() {
-		loginCtrl = new LoginController(4);
-		a = loginCtrl.getA();
-		if (a == 2) {
-			JOptionPane.showMessageDialog(null, "LOGIN SUCESSFULLY");
-			login.closeForm();
-			mainFrame.addAccount();
-		} else {
-			JOptionPane.showMessageDialog(null, "LOGIN UNSUCESSFULLY");
-		}
-	}
+	private boolean loginStatus;
 
 	public MainController() {
 		mainFrame = new MainFrame();
@@ -62,7 +26,7 @@ public class MainController {
 				// TODO Auto-generated method stub
 				login = new LoginView();
 
-				// login by pressing button
+				// handle events for button Login
 				login.setBtnLoginActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
@@ -70,14 +34,14 @@ public class MainController {
 					}
 				});
 
-				// login after enter user name
+				// handle events for textField UserName
 				login.setTfUserNameActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						login();
 					}
 				});
-				// login after enter password
+				// handle events for PasswordField
 				login.setPwFieldActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
@@ -97,6 +61,74 @@ public class MainController {
 			}
 
 		});
+
+		mainFrame.setSeachBookAL(new ActionListener() {
+
+			@SuppressWarnings("unused")
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				SearchBookController searchBook = new SearchBookController();
+			}
+
+		});
+
+		mainFrame.setAllBookAL(new ActionListener() {
+			@SuppressWarnings("unused")
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				AllBookController allBook = new AllBookController();
+			}
+		});
+	}
+
+	public void login() {
+
+		String inputUser = login.getUser();
+		String inputPassword = login.getPassword();
+		if (inputUser.equals("") || inputPassword.equals("")) {
+			JOptionPane.showMessageDialog(null, "LOGIN UNSUCESSFULLY");
+		} else {
+			String query = "select * from account";
+			Statement statement;
+			try {
+				statement = controll.ConnectDatabase.getConnection().createStatement();
+				ResultSet rs = statement.executeQuery(query);
+				if (!rs.first()) {
+					JOptionPane.showMessageDialog(null, "NONE ACCOUNT HAS BEEN CREATED");
+				} else {
+					do {
+						String userName = rs.getString("userName");
+						String password = rs.getString("password");
+
+						if (userName.equalsIgnoreCase(inputUser) & password.equals(inputPassword)) {
+							loginStatus = true;
+							JOptionPane.showMessageDialog(null, "LOGIN SUCESSFULLY");
+							login.closeForm(); // close login window
+							mainFrame.addAccount(userName);
+
+							// create event for logout
+							mainFrame.setLogoutAL(new ActionListener() {
+								@Override
+								public void actionPerformed(ActionEvent arg0) {
+									mainFrame.dispose();
+									new MainController();
+								}
+							});
+							
+						}
+						
+					} while (rs.next());
+					if (!loginStatus) {
+						JOptionPane.showMessageDialog(null, "LOGIN UNSUCESSFULLY");
+					}
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 
 	public static void main(String[] args) {
