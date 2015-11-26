@@ -56,6 +56,10 @@ public class SignUpView extends JFrame{
 		this.btnSignUp.addActionListener(listener);
 	}
 	
+	public void setTfRePassWordAL(ActionListener al) {
+		this.rePwField.addActionListener(al);
+	}
+	
 	public String getUserName() {
 		return this.tfUserName.getText();
 	}

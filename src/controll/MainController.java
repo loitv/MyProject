@@ -8,6 +8,7 @@ import java.sql.Statement;
 
 import javax.swing.JOptionPane;
 
+import view.AboutUsView;
 import view.LoginView;
 import view.MainFrame;
 
@@ -81,6 +82,14 @@ public class MainController {
 				AllBookController allBook = new AllBookController();
 			}
 		});
+		
+		mainFrame.setAboutUsAL(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				new AboutUsView();
+			}
+		});
 	}
 
 	public void login() {
@@ -107,7 +116,6 @@ public class MainController {
 							JOptionPane.showMessageDialog(null, "LOGIN SUCESSFULLY");
 							login.closeForm(); // close login window
 							mainFrame.addAccount(userName);
-
 							// create event for logout
 							mainFrame.setLogoutAL(new ActionListener() {
 								@Override
@@ -116,6 +124,26 @@ public class MainController {
 									new MainController();
 								}
 							});
+							
+							if (!userName.equals("Loitv")) {
+								String userType = "Reader Information";
+								mainFrame.addReaderManagement();
+								mainFrame.setReaderInfoAL(new ActionListener(){
+									@Override
+									public void actionPerformed(ActionEvent arg0) {
+										// TODO Auto-generated method stub
+										new PersonalInformationController(userName,userType);
+									}
+								});
+								mainFrame.setBorrowBookInfoAL(new ActionListener() {
+									@Override
+									public void actionPerformed(ActionEvent e) {
+										// TODO Auto-generated method stub
+										
+									}
+								});
+								
+							}
 							
 						}
 						

@@ -20,10 +20,21 @@ public class SignUpController {
 	public SignUpController() {
 
 		signUp = new SignUpView();
+
+		// handle events for button Sign Up
 		signUp.setBtnSignUpActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				signUp();
+			}
+		});
+
+		// handle event for Password field
+		signUp.setTfRePassWordAL(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
 				signUp();
 			}
@@ -45,7 +56,32 @@ public class SignUpController {
 				String user;
 
 				if (!rs.first()) {
-					JOptionPane.showMessageDialog(null, "NONE ACCOUNT HAS BEEN CREATED");
+//					JOptionPane.showMessageDialog(null, "NONE ACCOUNT HAS BEEN CREATED");
+					signUp.closeForm();
+					JOptionPane.showMessageDialog(null, "SIGN UP SUCCESFULLY!");
+					String query1 = "insert into `account` values (?,?);";
+					String query2 = "insert into `personalInfo` values (?,?,?,?,?,?,?);";
+					try (PreparedStatement insertStmt = (PreparedStatement) controll.ConnectDatabase.getConnection()
+							.prepareStatement(query1)) {
+						insertStmt.setString(1, inputID);
+						insertStmt.setString(2, inputPw1);
+						insertStmt.executeUpdate();
+					} catch (SQLException sqlEx) {
+						sqlEx.printStackTrace();
+					}
+					try (PreparedStatement insertStmt = (PreparedStatement) controll.ConnectDatabase.getConnection()
+							.prepareStatement(query2)) {
+						insertStmt.setString(1, inputID);
+						insertStmt.setString(2, null);
+						insertStmt.setString(3, null);
+						insertStmt.setInt(4, 0);
+						insertStmt.setString(5, null);
+						insertStmt.setString(6, null);
+						insertStmt.setString(7, null);
+						insertStmt.executeUpdate();
+					} catch (SQLException sqlEx) {
+						sqlEx.printStackTrace();
+					}
 				} else {
 					do {
 						user = rs.getString("userName");
@@ -64,10 +100,24 @@ public class SignUpController {
 						signUp.closeForm();
 						JOptionPane.showMessageDialog(null, "SIGN UP SUCCESFULLY!");
 						String query1 = "insert into `account` values (?,?);";
+						String query2 = "insert into `personalInfo` values (?,?,?,?,?,?,?);";
 						try (PreparedStatement insertStmt = (PreparedStatement) controll.ConnectDatabase.getConnection()
 								.prepareStatement(query1)) {
 							insertStmt.setString(1, inputID);
 							insertStmt.setString(2, inputPw1);
+							insertStmt.executeUpdate();
+						} catch (SQLException sqlEx) {
+							sqlEx.printStackTrace();
+						}
+						try (PreparedStatement insertStmt = (PreparedStatement) controll.ConnectDatabase.getConnection()
+								.prepareStatement(query2)) {
+							insertStmt.setString(1, inputID);
+							insertStmt.setString(2, null);
+							insertStmt.setString(3, null);
+							insertStmt.setInt(4, 0);
+							insertStmt.setString(5, null);
+							insertStmt.setString(6, null);
+							insertStmt.setString(7, null);
 							insertStmt.executeUpdate();
 						} catch (SQLException sqlEx) {
 							sqlEx.printStackTrace();
