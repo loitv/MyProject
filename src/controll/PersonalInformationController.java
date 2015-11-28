@@ -23,46 +23,12 @@ public class PersonalInformationController {
 
 	// constructor
 	@SuppressWarnings({ })
-	public PersonalInformationController(String personalID, String userType) {
+	public PersonalInformationController(String personalID) {
 		
-		personalInfo = new PersonalInformationView(userType);
+		personalInfo = new PersonalInformationView();
 		personalInfo.setIDName(personalID);
-//		data = new Vector();
-//		String query = "select * from personalInfo;";
-//		try {
-//			statement = controll.ConnectDatabase.getConnection().createStatement();
-//			ResultSet rs = statement.executeQuery(query);
-//			if (!rs.first()) {
-//				JOptionPane.showMessageDialog(null, "HAVE NO RECORD");
-//			} else {
-//				do {
-//					String id = rs.getString("personalID");
-//					if (id.equals(personalID)) {
-//						String name = rs.getString("name");
-//						String gender = rs.getString("gender");
-//						int phone = rs.getInt("phone");
-//						String address = rs.getString("address");
-//						String dateBirth = rs.getString("dateOfBirth");
-//						String email = rs.getString("email");
-//						Vector reader = new Vector();
-//						// reader.addElement(id);
-//						reader.addElement(name);
-//						reader.addElement(gender);
-//						reader.addElement(phone);
-//						reader.addElement(address);
-//						reader.addElement(dateBirth);
-//						reader.addElement(email);
-//						data.add(reader);
-//						break;
-//					}
-//				} while (rs.next());
-//			}
-//			((PersonalInformationView) personalInfo).refreshTable(data);
-//		} catch (Exception sqlEx) {
-//			sqlEx.printStackTrace();
-//		}
 		
-		// Update
+		// show table information
 		updateTable(personalID);
 
 		// handle events when user click in row table
@@ -72,9 +38,8 @@ public class PersonalInformationController {
 			public void mouseClicked(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 				
-				try {
+				try { // get informations from table and set them to TextField for editing and updating 
 					personalInfo.getTfName().setText(personalInfo.getTable().getValueAt(0, 0).toString());
-					personalInfo.getTfGender().setText(personalInfo.getTable().getValueAt(0, 1).toString());
 					personalInfo.getTfEmail().setText(personalInfo.getTable().getValueAt(0, 5).toString());
 					personalInfo.getTfAddress().setText(personalInfo.getTable().getValueAt(0, 3).toString());
 					personalInfo.getTfPhone().setText(personalInfo.getTable().getValueAt(0, 2).toString());
@@ -118,7 +83,6 @@ public class PersonalInformationController {
 				// TODO Auto-generated method stub
 				
 				if (personalInfo.getName().equals("")&
-						personalInfo.getGender().equals("")&
 						personalInfo.getAddress().equals("")&
 						personalInfo.getEmail().equals("")&
 						personalInfo.getPhone() == 0) {
@@ -130,7 +94,7 @@ public class PersonalInformationController {
 							.prepareStatement(query)) {
 
 						addStmt.setString(1, personalInfo.getName());
-						addStmt.setString(2, personalInfo.getGender());
+						addStmt.setString(2, personalInfo.getCbGender());
 						addStmt.setInt(3, personalInfo.getPhone());
 						addStmt.setString(4, personalInfo.getAddress());
 						addStmt.setString(5, personalInfo.getDateOfBirth());
@@ -144,7 +108,6 @@ public class PersonalInformationController {
 				}
 				
 				personalInfo.getTfName().setText("");
-				personalInfo.getTfGender().setText("");
 				personalInfo.getTfPhone().setText("");
 				personalInfo.getTfAddress().setText("");
 				personalInfo.getTfEmail().setText("");

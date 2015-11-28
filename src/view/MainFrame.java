@@ -15,7 +15,9 @@ public class MainFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JMenuBar menuBar;
 	private JMenu menu;
-	private JMenuItem login, signUp, logout, searchBook, allBook, readerInfo, borrowBookInfo, aboutUs;
+	private JMenuItem login, signUp, logout, searchBook, allBook, readerInfo, borrowBookInfo, 
+	libBookManagement, libCreatePattern, libReaderInfo, librarianInfo, 
+	aboutUs;
 
 	public MainFrame() {
 		JPanel panel = new JPanel(new BorderLayout());
@@ -83,17 +85,9 @@ public class MainFrame extends JFrame {
 	public void setAllBookAL(ActionListener al) {
 		this.allBook.addActionListener(al);
 	}
-	
+
 	public void setAboutUsAL(ActionListener al) {
 		this.aboutUs.addActionListener(al);
-	}
-	
-	public void setReaderInfoAL(ActionListener al) {
-		this.readerInfo.addActionListener(al);
-	}
-	
-	public void setBorrowBookInfoAL(ActionListener al) {
-		this.borrowBookInfo.addActionListener(al);
 	}
 
 	// Add user's name into Menu bar
@@ -107,15 +101,49 @@ public class MainFrame extends JFrame {
 		menu.add(logout);
 		this.validate();
 	}
-	
-	// add management list when a reader login
+
+	// add reader management list when a reader login
 	public void addReaderManagement() {
-		readerInfo = new JMenuItem("Reader Information");
+		readerInfo = new JMenuItem("Personal Information");
 		borrowBookInfo = new JMenuItem("Books You Brorrowed");
 		menu = menuBar.getMenu(2);
-		menu.add(readerInfo);
 		menu.add(borrowBookInfo);
+		menu.add(readerInfo);
 	}
+	public void setReaderInfoAL(ActionListener al) {
+		this.readerInfo.addActionListener(al);
+	}
+
+	public void setBorrowBookInfoAL(ActionListener al) {
+		this.borrowBookInfo.addActionListener(al);
+	}
+
+	// add librarian management list when a librarian login
+	public void addLibrarianManagement() {
+		libBookManagement = new JMenuItem("Book Management");
+		libCreatePattern = new JMenuItem("Create New Pattern Borrow");
+		libReaderInfo = new JMenuItem("Reader Information");
+		librarianInfo = new JMenuItem("Personal Information");
+		menu = menuBar.getMenu(2);
+		menu.add(libBookManagement);
+		menu.add(libCreatePattern);
+		menu.add(libReaderInfo);
+		menu.add(librarianInfo);
+		
+	}
+	public void setLibBookManagementAL(ActionListener al) {
+		this.libBookManagement.addActionListener(al);
+	}
+	public void setLibCreatePatternAL(ActionListener al) {
+		this.libCreatePattern.addActionListener(al);
+	}
+	public void setLibReaderInfoAL(ActionListener al) {
+		this.libReaderInfo.addActionListener(al);
+	}
+	public void setLibrarianInfoAL(ActionListener al) {
+		this.librarianInfo.addActionListener(al);
+	}
+	
 
 	public JMenuItem getLogin() {
 		return login;

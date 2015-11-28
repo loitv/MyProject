@@ -124,21 +124,39 @@ public class MainController {
 									new MainController();
 								}
 							});
+							// when a librarian login
+							if (userName.equals("Librarian")) {
+								mainFrame.addLibrarianManagement();
+								mainFrame.setLibReaderInfoAL(new ActionListener() {
+									public void actionPerformed(ActionEvent arg0) {
+										new ReaderInformationController();
+									};
+								});
+								
+								mainFrame.setLibBookManagementAL(new ActionListener() {
+									public void actionPerformed(ActionEvent e) {
+										new BookController();
+									};
+								});
+							}
 							
-							if (!userName.equals("Loitv")) {
-								String userType = "Reader Information";
+							if ((!userName.equals("Admin"))&(!userName.equals("Librarian"))) {
 								mainFrame.addReaderManagement();
 								mainFrame.setReaderInfoAL(new ActionListener(){
 									@Override
 									public void actionPerformed(ActionEvent arg0) {
 										// TODO Auto-generated method stub
-										new PersonalInformationController(userName,userType);
+										new PersonalInformationController(userName);
 									}
 								});
 								mainFrame.setBorrowBookInfoAL(new ActionListener() {
 									@Override
 									public void actionPerformed(ActionEvent e) {
 										// TODO Auto-generated method stub
+										
+										//////////////////////////////
+										/////WRITE SOMETHING HERE/////
+										//////////////////////////////
 										
 									}
 								});

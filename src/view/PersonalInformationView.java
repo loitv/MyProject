@@ -23,7 +23,8 @@ public class PersonalInformationView extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JLabel lbID, lbIDName, lbName, lbGender, lbPhone, lbAddress, lbDateOfBirth, lbEmail;
-	private JTextField tfName, tfGender, tfPhone, tfAddress, tfEmail;
+	private JTextField tfName, tfPhone, tfAddress, tfEmail;
+	private JComboBox<String> cbGender;
 	private JTable personalInfo;
 	private JButton btnUpdate;
 	private JDatePickerImpl datePicker;
@@ -31,9 +32,9 @@ public class PersonalInformationView extends JFrame {
 
 	// constructor
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public PersonalInformationView(String userType) {
-		super(userType);
-		setSize(900, 350);
+	public PersonalInformationView() {
+		super("Personal Information");
+		setSize(900, 450);
 		setLayout(new BorderLayout(5, 5));
 
 		JPanel panel1 = new JPanel();
@@ -55,13 +56,14 @@ public class PersonalInformationView extends JFrame {
 		lbEmail = new JLabel("Email");
 		lbEmail.setForeground(Color.BLUE);
 
-		// tfID = new JTextField(15);
 		tfName = new JTextField(15);
-		tfGender = new JTextField(15);
 		tfPhone = new JTextField(15);
 		tfAddress = new JTextField(15);
-//		tfDateOfBirth = new JTextField(15);
 		tfEmail = new JTextField(15);
+		
+		cbGender = new JComboBox();
+		cbGender.addItem("Male");
+		cbGender.addItem("Female");
 		
 		model = new UtilDateModel();
 		model.setDate(1993, 3, 17);
@@ -81,7 +83,8 @@ public class PersonalInformationView extends JFrame {
 		panel1.add(lbName);
 		panel1.add(tfName);
 		panel1.add(lbGender);
-		panel1.add(tfGender);
+//		panel1.add(tfGender);
+		panel1.add(cbGender);
 		panel1.add(lbPhone);
 		panel1.add(tfPhone);
 		panel1.add(lbAddress);
@@ -144,8 +147,8 @@ public class PersonalInformationView extends JFrame {
 		return tfName.getText();
 	}
 
-	public String getGender() {
-		return tfGender.getText();
+	public String getCbGender() {
+		return (String)cbGender.getSelectedItem();
 	}
 
 	public int getPhone() {
@@ -182,29 +185,19 @@ public class PersonalInformationView extends JFrame {
 	public JTextField getTfName() {
 		return tfName;
 	}
-
-	public JTextField getTfGender() {
-		return tfGender;
-	}
-
 	public JTextField getTfPhone() {
 		return tfPhone;
 	}
-
 	public JTextField getTfAddress() {
 		return tfAddress;
 	}
-
 	public JTextField getTfEmail() {
 		return tfEmail;
 	}
-
 	public JLabel getLbIDName() {
 		return lbIDName;
 	}
-	
 	public static void main(String[] args) {
-		new PersonalInformationView("fghf");
+		new PersonalInformationView();
 	}
-
 }

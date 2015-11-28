@@ -1,8 +1,24 @@
 package view;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 import java.util.Vector;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+
+import org.jdesktop.xswingx.*;
 
 public class BookView extends JFrame {
 
@@ -45,6 +61,7 @@ public class BookView extends JFrame {
 		tfAuthor = new JTextField(36);
 		tfCategory = new JTextField(36);
 		tfQuantity = new JTextField(36);
+		PromptSupport.setPrompt("Only for button ADD", tfQuantity);
 
 		panel1 = new JPanel();
 		panel1.setLayout(new GridLayout(3, 6, 5, 10));
@@ -75,7 +92,8 @@ public class BookView extends JFrame {
 		colsName.addElement("Author");
 		colsName.addElement("Category");
 		colsName.addElement("Price");
-		colsName.addElement("Quantity");
+		colsName.addElement("Total Book");
+		colsName.addElement("Remain Book");
 		Vector data = new Vector();
 		
 		bookDetails = new JTable(data, colsName);
@@ -97,8 +115,103 @@ public class BookView extends JFrame {
 		setLocationRelativeTo(null);
 		setVisible(true);
 	}
+	
+	public void setBtnAddAL(ActionListener al) {
+		this.btnAdd.addActionListener(al);
+	}
+	public void setBtnEditAL(ActionListener al) {
+		this.btnEdit.addActionListener(al);
+	}
+	public void setBtnDeleteAL(ActionListener al) {
+		this.btnDelete.addActionListener(al);
+	}
+	public void setBookDetailsML(MouseListener ml) {
+		this.bookDetails.addMouseListener(ml);
+	}
+	
+	
+	////////////////////////////////
+	public int getISBN() {
+		if (tfISBN.getText().equals("")) {
+			return 0;
+		} else {
+			return Integer.parseInt(tfISBN.getText());
+		}
+	}
+	public String getTitle() {
+		return tfTitle.getText();
+	}
+	public String getAuthor() {
+		return tfAuthor.getText();
+	}
+	public String getCategory() {
+		return tfCategory.getText();
+	}
+	public double getPrice() {
+		if (tfPrice.getText().equals("")) {
+			return 0;
+		} else {
+			return Double.parseDouble(tfPrice.getText());
+		}
+	}
+	public int getQuantity() {
+		if (tfQuantity.getText().equals("")) {
+			return 0;
+		} else {
+			return Integer.parseInt(tfQuantity.getText());
+		}
+	}
 
+	/////////////////////////////////////////////////////////
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public void refreshTable(Vector list) {
+		TableModel model = bookDetails.getModel();
+		Vector cols = new Vector();
+		cols.addElement("ISBN");
+		cols.addElement("Title");
+		cols.addElement("Author");
+		cols.addElement("Category");
+		cols.addElement("Price");
+		cols.addElement("Total");
+		cols.addElement("Remain");
+		model = new DefaultTableModel(list, cols);
+		bookDetails.setModel(model);
+		bookDetails.repaint();
+	}
+	
+	//////////////////////////////////////////////////
+	public JTextField getTfQuantity() {
+		return tfQuantity;
+	}
+
+	
+	//////////////////////////////////////
 	public static void main(String[] args) {
 		new BookView();
+	}
+
+	///////////////////////////////////////////
+	public JTextField getTfISBN() {
+		return tfISBN;
+	}
+
+	public JTextField getTfTitle() {
+		return tfTitle;
+	}
+
+	public JTextField getTfAuthor() {
+		return tfAuthor;
+	}
+
+	public JTextField getTfCategory() {
+		return tfCategory;
+	}
+
+	public JTextField getTfPrice() {
+		return tfPrice;
+	}
+
+	public JTable getBookDetails() {
+		return bookDetails;
 	}
 }
