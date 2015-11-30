@@ -83,7 +83,6 @@ public class PersonalInformationView extends JFrame {
 		panel1.add(lbName);
 		panel1.add(tfName);
 		panel1.add(lbGender);
-//		panel1.add(tfGender);
 		panel1.add(cbGender);
 		panel1.add(lbPhone);
 		panel1.add(tfPhone);
