@@ -29,32 +29,17 @@ public class BookController {
 		bookView = new BookView();
 		// String query = "select * from book;";
 		updateBook();
-
-		// handle event for button Add
+		//////////////////////////////////
+		/// handle event for button Add///
+		//////////////////////////////////
 		bookView.setBtnAddAL(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
 
-				ArrayList<Integer> isbnList = new ArrayList<Integer>();
+				ArrayList<Integer> isbnList = createListOfISBN();
 				int a = 0;
 
-				/// Create list of ISBN
-				try {
-					String query = "select * from book;";
-					statement = controll.ConnectDatabase.getConnection().createStatement();
-					ResultSet rs = statement.executeQuery(query);
-					if (!rs.first()) {
-						JOptionPane.showMessageDialog(null, "HAVE NO RECORD");
-					} else {
-						do {
-							isbnList.add(rs.getInt("ISBN"));
-						} while (rs.next());
-					}
-				} catch (SQLException sqlEx) {
-					sqlEx.printStackTrace();
-				}
-				
 				// Add new book or add a quantity of availble book in lirary
 				try {
 					if (bookView.getISBN() == 0 || bookView.getTitle().equals("") || bookView.getAuthor().equals("")
@@ -74,8 +59,8 @@ public class BookController {
 						if (a == isbnList.size()) { // Not concident with any
 													// available book
 							String query = "insert into `book` values (?,?,?,?,?,?,?);";
-							try (PreparedStatement insertStmt = (PreparedStatement) controll.ConnectDatabase.getConnection()
-									.prepareStatement(query)) {
+							try (PreparedStatement insertStmt = (PreparedStatement) controll.ConnectDatabase
+									.getConnection().prepareStatement(query)) {
 								insertStmt.setInt(1, bookView.getISBN());
 								insertStmt.setString(2, bookView.getTitle());
 								insertStmt.setString(3, bookView.getAuthor());
@@ -84,7 +69,7 @@ public class BookController {
 								insertStmt.setInt(6, bookView.getQuantity());
 								insertStmt.setInt(7, bookView.getQuantity());
 								insertStmt.executeUpdate();
-								
+
 								updateBook();
 
 								// set all fields empty
@@ -95,24 +80,19 @@ public class BookController {
 								bookView.getTfPrice().setText("");
 								bookView.getTfQuantity().setText("");
 								bookView.getTfISBN().setEditable(true);
-								
+
 							} catch (SQLException sqlEx) {
 								sqlEx.printStackTrace();
 							}
 						} else {
 							String query = "UPDATE book SET Total=Total + ? ,Remain=Remain+? WHERE ISBN=?";
-							try (PreparedStatement insertStmt = (PreparedStatement) controll.ConnectDatabase.getConnection()
-									.prepareStatement(query)) {
-//								insertStmt.setInt(1, bookView.getISBN());
-//								insertStmt.setString(2, bookView.getTitle());
-//								insertStmt.setString(3, bookView.getAuthor());
-//								insertStmt.setString(4, bookView.getCategory());
-//								insertStmt.setDouble(5, bookView.getPrice());
+							try (PreparedStatement insertStmt = (PreparedStatement) controll.ConnectDatabase
+									.getConnection().prepareStatement(query)) {
 								insertStmt.setInt(1, bookView.getQuantity());
 								insertStmt.setInt(2, bookView.getQuantity());
 								insertStmt.setInt(3, bookView.getISBN());
 								insertStmt.executeUpdate();
-								
+
 								updateBook();
 
 								// set all fields empty
@@ -133,8 +113,9 @@ public class BookController {
 				}
 			}
 		});
-
-		// handle events for button Edit
+		//////////////////////////////////
+		// handle events for button Edit//
+		//////////////////////////////////
 		bookView.setBtnEditAL(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -173,6 +154,112 @@ public class BookController {
 				} catch (Exception ex) {
 					JOptionPane.showMessageDialog(null, "ERRORS SOMEWHERE!");
 				}
+
+			}
+		});
+
+		////////////////////////////////////
+		// handle events for button Delete//
+		////////////////////////////////////
+		bookView.setBtnDeleteAL(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				// JOptionPane.showConfirmDialog(null, "Are you sure to delete
+				// this book?", "Warning",
+				// JOptionPane.YES_NO_OPTION);
+
+				ArrayList<Integer> isbnList = createListOfISBN();
+				int a = 0;
+				// Delete book or subtract a quantity of availble book in lirary
+				try {
+					if (bookView.getISBN() == 0) {
+						JOptionPane.showMessageDialog(null, "Cannot delete caused ISBN field is empty!");
+					} else {
+						int isbn = bookView.getISBN();
+						for (int i = 0; i < isbnList.size(); i++) {
+							if (isbn != isbnList.get(i)) {
+								a++;
+							}
+							if (isbn == isbnList.get(i)) {
+								break;
+							}
+						}
+						if (a == isbnList.size()) { // Not concident with any
+													// available book
+							JOptionPane.showMessageDialog(null, "Cannot delete caused ISBN ISN'T CORRECT!");
+
+						} else {
+							if (bookView.getQuantity() == 0) {
+								int k = JOptionPane.showConfirmDialog(null, "Are you sure to delete this book?",
+										"Warning", JOptionPane.YES_NO_OPTION);
+								if (k == 0) {
+									String query = "Delete from `book` where isbn = ?";
+									try (PreparedStatement preStmt = (PreparedStatement) controll.ConnectDatabase
+											.getConnection().prepareStatement(query)) {
+										preStmt.setInt(1, isbn);
+										preStmt.executeUpdate();
+										updateBook();
+									} catch (SQLException sqlEx) {
+										sqlEx.printStackTrace();
+									}
+								}
+							} else {
+								String query1 = "select * from book";
+								try {
+									Statement statement = controll.ConnectDatabase.getConnection().createStatement();
+									ResultSet rs = statement.executeQuery(query1);
+									if (!rs.first()) {
+										JOptionPane.showMessageDialog(null, "HAVE NO RECORD!");
+									} else {
+										int quantity;
+										do {
+											quantity = rs.getInt("Remain");
+											int selectedISBN = rs.getInt("ISBN");
+											if (isbn == selectedISBN) {
+												break;
+											}
+										} while (rs.next());
+										if (bookView.getQuantity() >= quantity || bookView.getQuantity() <= 0) {
+											JOptionPane.showMessageDialog(null, "INVALID QUANTITY!");
+										} else { // case: input quantity is
+													// valid
+											String query = "UPDATE book SET Total=Total - ? ,Remain=Remain-? WHERE ISBN=?";
+											try (PreparedStatement insertStmt = (PreparedStatement) controll.ConnectDatabase
+													.getConnection().prepareStatement(query)) {
+//												insertStmt.setArray(parameterIndex, x);
+												insertStmt.setInt(1, bookView.getQuantity());
+												insertStmt.setInt(2, bookView.getQuantity());
+												insertStmt.setInt(3, bookView.getISBN());
+												insertStmt.executeUpdate();
+
+												updateBook();
+
+												// set all fields empty
+												bookView.getTfISBN().setText("");
+												bookView.getTfTitle().setText("");
+												bookView.getTfAuthor().setText("");
+												bookView.getTfCategory().setText("");
+												bookView.getTfPrice().setText("");
+												bookView.getTfQuantity().setText("");
+												bookView.getTfISBN().setEditable(true);
+											} catch (SQLException sqlEx) {
+												sqlEx.printStackTrace();
+											}
+										}
+									}
+								} catch (SQLException sqlEx) {
+									// JOptionPane.showMessageDialog(null,
+									// "ERRORS SOMEWHERE!");
+									sqlEx.printStackTrace();
+								}
+							}
+						}
+					}
+				} catch (Exception ex) {
+					JOptionPane.showMessageDialog(null, "ERRORS SOMEWHERE!");
+				}
+				// String query = "Delete from book where isbn = ?";
 
 			}
 		});
@@ -260,6 +347,26 @@ public class BookController {
 		} catch (SQLException sqlEx) {
 			sqlEx.printStackTrace();
 		}
+	}
+
+	public ArrayList<Integer> createListOfISBN() {
+		ArrayList<Integer> isbnList = new ArrayList<Integer>();
+		// int a = 0;
+		try {
+			String query = "select * from book;";
+			statement = controll.ConnectDatabase.getConnection().createStatement();
+			ResultSet rs = statement.executeQuery(query);
+			if (!rs.first()) {
+				JOptionPane.showMessageDialog(null, "HAVE NO RECORD");
+			} else {
+				do {
+					isbnList.add(rs.getInt("ISBN"));
+				} while (rs.next());
+			}
+		} catch (SQLException sqlEx) {
+			sqlEx.printStackTrace();
+		}
+		return isbnList;
 	}
 
 	public static void main(String[] args) {

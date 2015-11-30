@@ -20,8 +20,10 @@ public class AllBookController {
 
 	public AllBookController() {
 		allBook = new AllBookView();
+		// DISPLAY ALL BOOK ON TABLE
 		displayBook("select * from book;");
 		
+		// Add items into ComboBox
 		String query = "select DISTINCT CATEGORY from BOOK;";
 		try {
 			Statement statement = controll.ConnectDatabase.getConnection().createStatement();
@@ -32,7 +34,7 @@ public class AllBookController {
 				// display result if not empty
 				do {
 					String category = rs.getString("category");
-					allBook.selectFromComboBox(category);
+					allBook.addItemsToComboBox(category);
 				} while (rs.next());
 			}
 		} catch (SQLException sqlEX) {
@@ -55,7 +57,7 @@ public class AllBookController {
 						query = String.format("select * from book where category = '%s'", id);
 					}
 					data = new Vector();
-					displayBook(query);
+					displayBook(query); // Update Book information on table
 				}
 			}
 
@@ -80,7 +82,6 @@ public class AllBookController {
 					String author = rs.getString("author");
 					String category = rs.getString("category");
 					double price = rs.getDouble("Price");
-					int quantity = rs.getInt("Quantity");
 
 					Vector bookDetail = new Vector();
 					bookDetail.addElement(isbn);
@@ -88,7 +89,6 @@ public class AllBookController {
 					bookDetail.addElement(author);
 					bookDetail.addElement(category);
 					bookDetail.addElement(price);
-					bookDetail.addElement(quantity);
 					data.add(bookDetail);
 				} while (rs.next());
 			}

@@ -55,7 +55,7 @@ public class SearchBookView extends JFrame {
 		colsName.addElement("Author");
 		colsName.addElement("Category");
 		colsName.addElement("Price");
-		colsName.addElement("Quantity");
+//		colsName.addElement("Quantity");
 		Vector data = new Vector();
 		searchBook = new JTable(data, colsName);
 		searchBook.setPreferredScrollableViewportSize(new Dimension(500, 100));
@@ -85,11 +85,7 @@ public class SearchBookView extends JFrame {
 		this.tfBook.addActionListener(al);
 	}
 
-//	public void setCbCategoryAL(ActionListener al) {
-//		this.cbCategory.addActionListener(al);
-//	}
-
-	public void selectFromComboBox(String name) {
+	public void addItemToComboBox(String name) {
 		DefaultComboBoxModel<String> model = (DefaultComboBoxModel<String>) cbCategory.getModel();
 		model.addElement(name);
 	}
@@ -115,7 +111,7 @@ public class SearchBookView extends JFrame {
 		cols.addElement("Author");
 		cols.addElement("Category");
 		cols.addElement("Price");
-		cols.addElement("Quantity");
+//		cols.addElement("Quantity");
 		model = new DefaultTableModel(list, cols);
 		searchBook.setModel(model);
 		searchBook.repaint();

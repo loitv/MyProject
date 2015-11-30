@@ -129,13 +129,25 @@ public class MainController {
 								mainFrame.addLibrarianManagement();
 								mainFrame.setLibReaderInfoAL(new ActionListener() {
 									public void actionPerformed(ActionEvent arg0) {
-										new ReaderInformationController();
+//										new ReaderInformationController();
 									};
 								});
 								
 								mainFrame.setLibBookManagementAL(new ActionListener() {
 									public void actionPerformed(ActionEvent e) {
 										new BookController();
+									};
+								});
+								
+								mainFrame.setLibCreatePatternAL(new ActionListener() {
+									public void actionPerformed(ActionEvent e) {
+										new PatternBorrowController();
+									};
+								});
+								
+								mainFrame.setLibrarianInfoAL(new ActionListener() {
+									public void actionPerformed(ActionEvent arg0) {
+										new PersonalInformationController(userName);
 									};
 								});
 							}

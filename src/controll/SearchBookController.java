@@ -21,6 +21,12 @@ public class SearchBookController {
 
 	public SearchBookController() {
 		searchBookView = new SearchBookView();
+		//DISPLAY ALL BOOK//
+		displayBook("select * from book;");
+		
+		/////////////////////////////
+		/// Add Items into ComboBox///
+		/////////////////////////////
 		String query = "select DISTINCT CATEGORY from BOOK;";
 		try {
 			Statement statement = controll.ConnectDatabase.getConnection().createStatement();
@@ -31,13 +37,15 @@ public class SearchBookController {
 				// display result if not empty
 				do {
 					String category = rs.getString("category");
-					searchBookView.selectFromComboBox(category);
+					searchBookView.addItemToComboBox(category);
 				} while (rs.next());
 			}
 		} catch (SQLException sqlEX) {
 			sqlEX.printStackTrace();
 		}
-		// handle events for btnSearch;
+		//////////////////////////////////
+		/// handle events for btnSearch;///
+		//////////////////////////////////
 		searchBookView.setBtnSearchAL(new ActionListener() {
 
 			@SuppressWarnings({ "rawtypes" })
@@ -50,8 +58,7 @@ public class SearchBookController {
 					data = new Vector();
 
 					String input = "%".concat(searchBookView.getInputBookName()).concat("%");
-					String query = String.format("select * from book where bookName like '%s'",
-							input);
+					String query = String.format("select * from book where bookName like '%s'", input);
 					// display book detail
 					displayBook(query);
 				}
@@ -59,7 +66,7 @@ public class SearchBookController {
 			}
 
 		});
-		
+
 		// handle event for text field serachBook
 		searchBookView.setTfBookAL(new ActionListener() {
 			@SuppressWarnings("rawtypes")
@@ -68,11 +75,11 @@ public class SearchBookController {
 				// TODO Auto-generated method stub
 				if (searchBookView.getInputBookName().equals("")) {
 					JOptionPane.showMessageDialog(null, "BOOK NAME IS EMPTY");
+					displayBook("select * from `book`;");
 				} else {
 					data = new Vector();
 					String input = "%".concat(searchBookView.getInputBookName()).concat("%");
-					String query = String.format("select * from book where bookName like '%s'",
-							input);
+					String query = String.format("select * from book where bookName like '%s'", input);
 					// display book detail
 					displayBook(query);
 				}
@@ -96,15 +103,17 @@ public class SearchBookController {
 
 		});
 	}
-	
+
 	// method for displaying book detail on table
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void displayBook(String query) {
+		data = new Vector();
 		try {
 			Statement statement = controll.ConnectDatabase.getConnection().createStatement();
 			ResultSet rs = statement.executeQuery(query);
 			if (!rs.first()) {
 				JOptionPane.showMessageDialog(null, "HAVE NO RECORD");
+				displayBook("select * from `book`;");
 			} else {
 				// display if not empty
 				do {
@@ -113,7 +122,6 @@ public class SearchBookController {
 					String author = rs.getString("author");
 					String category = rs.getString("category");
 					double price = rs.getDouble("Price");
-					int quantity = rs.getInt("Quantity");
 
 					Vector bookDetail = new Vector();
 					bookDetail.addElement(isbn);
@@ -121,7 +129,6 @@ public class SearchBookController {
 					bookDetail.addElement(author);
 					bookDetail.addElement(category);
 					bookDetail.addElement(price);
-					bookDetail.addElement(quantity);
 					data.add(bookDetail);
 				} while (rs.next());
 			}
@@ -130,10 +137,8 @@ public class SearchBookController {
 			sqlEx.printStackTrace();
 		}
 	}
-	
+
 	public static void main(String[] args) {
 		new SearchBookController();
-		String in = "loi".concat("% ");
-		System.out.println(String.format("abc '%s'", in));
 	}
 }

@@ -85,7 +85,7 @@ public class BookView extends JFrame {
 		panel1.add(new JLabel());
 
 		add(panel1, BorderLayout.NORTH);
-		
+
 		Vector colsName = new Vector();
 		colsName.addElement("ISBN");
 		colsName.addElement("Tittle");
@@ -95,13 +95,13 @@ public class BookView extends JFrame {
 		colsName.addElement("Total Book");
 		colsName.addElement("Remain Book");
 		Vector data = new Vector();
-		
+
 		bookDetails = new JTable(data, colsName);
 		bookDetails.setPreferredScrollableViewportSize(new Dimension(500, 100));
 		bookDetails.setFillsViewportHeight(true);
 		scrollPanel = new JScrollPane(bookDetails);
 		add(scrollPanel, BorderLayout.CENTER);
-		
+
 		panel3 = new JPanel();
 		panel3.setLayout(new GridLayout(1, 3, 5, 10));
 		btnAdd = new JButton("Add");
@@ -115,21 +115,23 @@ public class BookView extends JFrame {
 		setLocationRelativeTo(null);
 		setVisible(true);
 	}
-	
+
 	public void setBtnAddAL(ActionListener al) {
 		this.btnAdd.addActionListener(al);
 	}
+
 	public void setBtnEditAL(ActionListener al) {
 		this.btnEdit.addActionListener(al);
 	}
+
 	public void setBtnDeleteAL(ActionListener al) {
 		this.btnDelete.addActionListener(al);
 	}
+
 	public void setBookDetailsML(MouseListener ml) {
 		this.bookDetails.addMouseListener(ml);
 	}
-	
-	
+
 	////////////////////////////////
 	public int getISBN() {
 		if (tfISBN.getText().equals("")) {
@@ -138,15 +140,19 @@ public class BookView extends JFrame {
 			return Integer.parseInt(tfISBN.getText());
 		}
 	}
+
 	public String getTitle() {
 		return tfTitle.getText();
 	}
+
 	public String getAuthor() {
 		return tfAuthor.getText();
 	}
+
 	public String getCategory() {
 		return tfCategory.getText();
 	}
+
 	public double getPrice() {
 		if (tfPrice.getText().equals("")) {
 			return 0;
@@ -154,6 +160,7 @@ public class BookView extends JFrame {
 			return Double.parseDouble(tfPrice.getText());
 		}
 	}
+
 	public int getQuantity() {
 		if (tfQuantity.getText().equals("")) {
 			return 0;
@@ -178,16 +185,10 @@ public class BookView extends JFrame {
 		bookDetails.setModel(model);
 		bookDetails.repaint();
 	}
-	
+
 	//////////////////////////////////////////////////
 	public JTextField getTfQuantity() {
 		return tfQuantity;
-	}
-
-	
-	//////////////////////////////////////
-	public static void main(String[] args) {
-		new BookView();
 	}
 
 	///////////////////////////////////////////
@@ -213,5 +214,10 @@ public class BookView extends JFrame {
 
 	public JTable getBookDetails() {
 		return bookDetails;
+	}
+
+	//////////////////////////////////////
+	public static void main(String[] args) {
+		new BookView();
 	}
 }
