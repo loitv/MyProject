@@ -82,8 +82,8 @@ public class MainController {
 				AllBookController allBook = new AllBookController();
 			}
 		});
-		
-		mainFrame.setAboutUsAL(new ActionListener(){
+
+		mainFrame.setAboutUsAL(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
@@ -110,6 +110,7 @@ public class MainController {
 					do {
 						String userName = rs.getString("userName");
 						String password = rs.getString("password");
+						int type = rs.getInt("type");
 
 						if (userName.equalsIgnoreCase(inputUser) & password.equals(inputPassword)) {
 							loginStatus = true;
@@ -124,37 +125,74 @@ public class MainController {
 									new MainController();
 								}
 							});
+							// when a ADMIN (MANAGER) login
+							if (type == 1) {
+								mainFrame.addAdminManagement();
+								mainFrame.setAdBookManagementAL(new ActionListener() {
+									
+									@Override
+									public void actionPerformed(ActionEvent e) {
+										// TODO Auto-generated method stub
+										new BookController();
+									}
+								});
+								mainFrame.setAdLibManagementAL(new ActionListener() {
+									
+									@Override
+									public void actionPerformed(ActionEvent e) {
+										// TODO Auto-generated method stub
+										new LibrarianManagerController();
+									}
+								});
+								mainFrame.setAdReaderManagementAL(new ActionListener() {
+									
+									@Override
+									public void actionPerformed(ActionEvent e) {
+										// TODO Auto-generated method stub
+										new ReaderInfoController();
+									}
+								});
+								mainFrame.setAdPersonalInfoAL(new ActionListener() {
+									
+									@Override
+									public void actionPerformed(ActionEvent e) {
+										// TODO Auto-generated method stub
+										new PersonalInformationController(userName);
+									}
+								});
+							}
+							
 							// when a librarian login
-							if (userName.equals("Librarian")) {
+							if (type == 2) {
 								mainFrame.addLibrarianManagement();
 								mainFrame.setLibReaderInfoAL(new ActionListener() {
 									public void actionPerformed(ActionEvent arg0) {
-//										new ReaderInformationController();
+										new ReaderInfoController();
 									};
 								});
-								
+
 								mainFrame.setLibBookManagementAL(new ActionListener() {
 									public void actionPerformed(ActionEvent e) {
 										new BookController();
 									};
 								});
-								
+
 								mainFrame.setLibCreatePatternAL(new ActionListener() {
 									public void actionPerformed(ActionEvent e) {
 										new PatternBorrowController();
 									};
 								});
-								
+
 								mainFrame.setLibrarianInfoAL(new ActionListener() {
 									public void actionPerformed(ActionEvent arg0) {
 										new PersonalInformationController(userName);
 									};
 								});
 							}
-							
-							if ((!userName.equals("Admin"))&(!userName.equals("Librarian"))) {
+							// when a reader login
+							if (type == 3) {
 								mainFrame.addReaderManagement();
-								mainFrame.setReaderInfoAL(new ActionListener(){
+								mainFrame.setReaderInfoAL(new ActionListener() {
 									@Override
 									public void actionPerformed(ActionEvent arg0) {
 										// TODO Auto-generated method stub
@@ -165,18 +203,18 @@ public class MainController {
 									@Override
 									public void actionPerformed(ActionEvent e) {
 										// TODO Auto-generated method stub
-										
+										new ReaderBorrowingInfoController(userName);
 										//////////////////////////////
-										/////WRITE SOMETHING HERE/////
+										///// WRITE SOMETHING HERE/////
 										//////////////////////////////
-										
+
 									}
 								});
-								
+
 							}
-							
+
 						}
-						
+
 					} while (rs.next());
 					if (!loginStatus) {
 						JOptionPane.showMessageDialog(null, "LOGIN UNSUCESSFULLY");

@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
@@ -27,27 +28,25 @@ import model.DateLabelFormatter;
 
 public class LibrarianManagerView extends JFrame{
 	private static final long serialVersionUID = 1L;
-	private JLabel lbID, lbIDName, lbName, lbGender, lbPhone, lbAddress, lbDateOfBirth, lbEmail;
-	private JTextField tfName, tfPhone, tfAddress, tfEmail;
+	private JLabel lbID, lbName, lbGender, lbPhone, lbAddress, lbDateOfBirth, lbEmail;
+	private JTextField tfID,tfName, tfPhone, tfAddress, tfEmail;
 	private JComboBox<String> cbGender;
-	private JTable LibrarianManegerInfo;
-	private JButton btnAdd, btnEdit, btnUpdate;
+	private JTable librarianManegerInfo;
+	private JButton btnAdd, btnEdit, btnDelete;
 	private JDatePickerImpl datePicker;
 	private UtilDateModel model;
 
 	// constructor
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public LibrarianManagerView() {
-		super("Librarian Manager View");
+		super("Librarian Management");
 		setSize(900, 450);
 		setLayout(new BorderLayout(5, 5));
 
 		JPanel panel1 = new JPanel();
 		panel1.setLayout(new GridLayout(5, 2, 10, 10));
-		lbID = new JLabel("ID");
+		lbID = new JLabel("Librarian ID");
 		lbID.setForeground(Color.BLUE);
-		lbIDName = new JLabel();
-		lbIDName.setForeground(Color.RED);
 		lbName = new JLabel("Full Name");
 		lbName.setForeground(Color.BLUE);
 		lbGender = new JLabel("Gender");
@@ -62,6 +61,7 @@ public class LibrarianManagerView extends JFrame{
 		lbEmail.setForeground(Color.BLUE);
 
 		tfName = new JTextField(15);
+		tfID = new JTextField(15);
 		tfPhone = new JTextField(15);
 		tfAddress = new JTextField(15);
 		tfEmail = new JTextField(15);
@@ -71,8 +71,6 @@ public class LibrarianManagerView extends JFrame{
 		cbGender.addItem("Female");
 		
 		model = new UtilDateModel();
-		model.setDate(1993, 3, 17);
-		model.setSelected(true);
 		Properties p = new Properties();
 		p.put("text.today", "Today");
 		p.put("text.month", "Month");
@@ -82,13 +80,12 @@ public class LibrarianManagerView extends JFrame{
 		
 
 		panel1.add(lbID);
-		panel1.add(lbIDName);
+		panel1.add(tfID);
 		panel1.add(new JLabel());
 		panel1.add(new JLabel());
 		panel1.add(lbName);
 		panel1.add(tfName);
 		panel1.add(lbGender);
-//		panel1.add(tfGender);
 		panel1.add(cbGender);
 		panel1.add(lbPhone);
 		panel1.add(tfPhone);
@@ -101,7 +98,8 @@ public class LibrarianManagerView extends JFrame{
 		add(panel1, BorderLayout.NORTH);
 
 		Vector colsName = new Vector();
-		colsName.addElement("Name");
+		colsName.addElement("Librarian ID");
+		colsName.addElement("Full Name");
 		colsName.addElement("Gender");
 		colsName.addElement("Phone");
 		colsName.addElement("Address");
@@ -109,63 +107,107 @@ public class LibrarianManagerView extends JFrame{
 		colsName.addElement("Email");
 		Vector data = new Vector();
 
-		LibrarianManegerInfo = new JTable(data, colsName);
-		LibrarianManegerInfo.setFillsViewportHeight(true);
-		JScrollPane scrollPanel = new JScrollPane(LibrarianManegerInfo);
+		librarianManegerInfo = new JTable(data, colsName);
+		librarianManegerInfo.setFillsViewportHeight(true);
+		JScrollPane scrollPanel = new JScrollPane(librarianManegerInfo);
 		add(scrollPanel, BorderLayout.CENTER);
 		
-		/*btnAdd = new JButton("Add Information");
-		add(btnAdd, BorderLayout.SOUTH);
-		btnEdit = new JButton("Edit Information");
-		add(btnEdit, BorderLayout.SOUTH);
-		btnUpdate = new JButton("Update Information");
-		add(btnUpdate, BorderLayout.SOUTH);*/
-		panel1 = new JPanel();
-		panel1.setLayout(new GridLayout(1, 3, 5, 10));
+		JPanel panel2 = new JPanel();
+		panel2.setLayout(new GridLayout(1, 3, 5, 10));
 		btnAdd = new JButton("Add");
 		btnEdit = new JButton("Edit");
-		btnUpdate = new JButton("Update");
-		panel1.add(btnAdd);
-		panel1.add(btnEdit);
-		panel1.add(btnUpdate);
-		add(panel1, BorderLayout.SOUTH);
+		btnDelete = new JButton("Delete");
+		panel2.add(btnAdd);
+		panel2.add(btnEdit);
+		panel2.add(btnDelete);
+		add(panel2, BorderLayout.SOUTH);
 
 		setLocationRelativeTo(null);
 		setVisible(true);
 	}
 
-	public void setBtnUpdateAL(ActionListener al) {
-		this.btnUpdate.addActionListener(al);
+	// GETTER METHOD
+	public JTextField getTfName() {
+		return tfName;
+	}
+	public JTextField getTfPhone() {
+		return tfPhone;
+	}
+	public JTextField getTfAddress() {
+		return tfAddress;
+	}
+	public JTextField getTfEmail() {
+		return tfEmail;
+	}
+	public JDatePickerImpl getDatePicker() {
+		return datePicker;
+	}
+	public JComboBox<String> getCbGender() {
+		return cbGender;
+	}
+
+	public JButton getBtnAdd() {
+		return btnAdd;
+	}
+	public JButton getBtnEdit() {
+		return btnEdit;
+	}
+	public JButton getBtnDelete() {
+		return btnDelete;
+	}
+	public void setDatePicker(JDatePickerImpl datePicker) {
+		this.datePicker = datePicker;
+	}
+	public JTextField getTfID() {
+		return tfID;
+	}
+	public JTable getLibrarianManegerInfoTable() {
+		return this.librarianManegerInfo;
+	}
+
+	// SET EVENTS LISTENER
+	public void setTfLibIDDocumentListener(DocumentListener dl) {
+		this.tfID.getDocument().addDocumentListener(dl);
+	}
+	
+	public void setBtnAddAL(ActionListener al) {
+		this.btnAdd.addActionListener(al);
+	}
+	public void setBtnEditAL(ActionListener al) {
+		this.btnEdit.addActionListener(al);
+	}
+	public void setBtnDeleteAL(ActionListener al) {
+		this.btnDelete.addActionListener(al);
+	}
+	public void setJTableMouseListener(MouseListener listener) {
+		this.librarianManegerInfo.addMouseListener(listener);
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void refreshTable(Vector list) {
-		TableModel model = LibrarianManegerInfo.getModel();
+		TableModel model = librarianManegerInfo.getModel();
 		Vector cols = new Vector();
-		cols.addElement("Name");
+		cols.addElement("Librarian ID");
+		cols.addElement("Full Name");
 		cols.addElement("Gender");
 		cols.addElement("Phone");
 		cols.addElement("Address");
 		cols.addElement("Date of Birth");
 		cols.addElement("Email");
 		model = new DefaultTableModel(list, cols);
-		LibrarianManegerInfo.setModel(model);
-		LibrarianManegerInfo.repaint();
+		librarianManegerInfo.setModel(model);
+		librarianManegerInfo.repaint();
 	}
 
-	public void setJTableMouseListener(MouseListener listener) {
-		this.LibrarianManegerInfo.addMouseListener(listener);
-	}
-
-	public JTable getTable() {
-		return this.LibrarianManegerInfo;
+	public String getLibID() {
+		return tfID.getText();
 	}
 
 	public String getName() {
 		return tfName.getText();
 	}
 
-	public String getCbGender() {
+	public String getGender() {
 		return (String)cbGender.getSelectedItem();
 	}
 
@@ -194,27 +236,8 @@ public class LibrarianManagerView extends JFrame{
 		return tfEmail.getText();
 	}
 
-	public void setIDName(String lbIDName) {
-		this.lbIDName.setText(lbIDName);
-		;
-	}
-
 	// get text field name, gender, phone, address, dateofBirth, email
-	public JTextField getTfName() {
-		return tfName;
-	}
-	public JTextField getTfPhone() {
-		return tfPhone;
-	}
-	public JTextField getTfAddress() {
-		return tfAddress;
-	}
-	public JTextField getTfEmail() {
-		return tfEmail;
-	}
-	public JLabel getLbIDName() {
-		return lbIDName;
-	}
+	
 	public static void main(String[] args) {
 		new LibrarianManagerView();
 	}

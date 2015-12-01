@@ -27,7 +27,7 @@ public class AllBookView extends JFrame {
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public AllBookView() {
-
+		super("All Books");
 		setLayout(new BorderLayout(10, 20));
 		JPanel panel1 = new JPanel();
 		panel1.setLayout(new FlowLayout());
@@ -50,7 +50,6 @@ public class AllBookView extends JFrame {
 		cols.addElement("Author");
 		cols.addElement("Category");
 		cols.addElement("Price");
-//		cols.addElement("Quantity");
 		Vector bookData = new Vector();
 		bookDetail = new JTable(bookData, cols);
 
@@ -58,8 +57,6 @@ public class AllBookView extends JFrame {
 		bookDetail.setFillsViewportHeight(true);
 		scrollPane = new JScrollPane(bookDetail);
 		add(scrollPane, BorderLayout.CENTER);
-
-		setTitle("ALL BOOKS");
 
 		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icon/allBook.jpg")));
 		setSize(970, 600);

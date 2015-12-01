@@ -129,6 +129,7 @@ public class ReaderBorrowingInfoView extends JFrame {
 	public void setIDChangeListener(ItemListener il) {
 		this.cbPatternID.addItemListener(il);
 	}
+	
 	public void addItemToComboBox(int patternID) {
 		DefaultComboBoxModel<Integer> model = (DefaultComboBoxModel<Integer>) cbPatternID.getModel();
 		model.addElement(patternID);

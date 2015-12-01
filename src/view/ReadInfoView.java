@@ -68,6 +68,10 @@ public class ReadInfoView extends JFrame {
 		setVisible(true);
 	}
 	
+	public JButton getBtnBorInfo() {
+		return btnBorInfo;
+	}
+
 	public void setBtnBorInfoAL(ActionListener al) {
 		this.btnBorInfo.addActionListener(al);
 	}

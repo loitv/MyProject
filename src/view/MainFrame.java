@@ -16,7 +16,7 @@ public class MainFrame extends JFrame {
 	private JMenuBar menuBar;
 	private JMenu menu;
 	private JMenuItem login, signUp, logout, searchBook, allBook, readerInfo, borrowBookInfo, 
-	libBookManagement, libCreatePattern, libReaderInfo, librarianInfo, 
+	libBookManagement, libCreatePattern, libReaderInfo, librarianInfo, adBookManagement, adLibManagerment,adReaderInfo, adInfo,
 	aboutUs;
 
 	public MainFrame() {
@@ -53,7 +53,7 @@ public class MainFrame extends JFrame {
 		cp.setLayout(new BorderLayout(5, 5));
 		cp.add(panel, BorderLayout.CENTER);
 
-		setTitle("MANAGEMENT OF LIBRARY BOOKS");
+		setTitle("LIBRARY MANAGEMENT");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icon/b5.png")));
 		setSize(970, 600);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -118,7 +118,7 @@ public class MainFrame extends JFrame {
 		this.borrowBookInfo.addActionListener(al);
 	}
 
-	// add librarian management list when a librarian login
+	// add librarian management list when a Librarian login
 	public void addLibrarianManagement() {
 		libBookManagement = new JMenuItem("Book Management");
 		libCreatePattern = new JMenuItem("Create New Pattern Borrow");
@@ -144,6 +144,32 @@ public class MainFrame extends JFrame {
 		this.librarianInfo.addActionListener(al);
 	}
 	
+	
+	// add librarian management list when a Admin login
+	//adBookManagement, adLibManagerment, adInfo
+		public void addAdminManagement() {
+			adBookManagement = new JMenuItem("Book Management");
+			adLibManagerment = new JMenuItem("Librarian");
+			adReaderInfo = new JMenuItem("Reader Management");
+			adInfo = new JMenuItem("Personal Information");
+			menu = menuBar.getMenu(2);
+			menu.add(adBookManagement);
+			menu.add(adLibManagerment);
+			menu.add(adReaderInfo);
+			menu.add(adInfo);
+		}
+		public void setAdBookManagementAL(ActionListener al) {
+			this.adBookManagement.addActionListener(al);
+		}
+		public void setAdLibManagementAL(ActionListener al) {
+			this.adLibManagerment.addActionListener(al);
+		}
+		public void setAdReaderManagementAL(ActionListener al) {
+			this.adReaderInfo.addActionListener(al);
+		}
+		public void setAdPersonalInfoAL(ActionListener al) {
+			this.adInfo.addActionListener(al);
+		}
 
 	public JMenuItem getLogin() {
 		return login;

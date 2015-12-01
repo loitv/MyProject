@@ -56,15 +56,15 @@ public class SignUpController {
 				String user;
 
 				if (!rs.first()) {
-//					JOptionPane.showMessageDialog(null, "NONE ACCOUNT HAS BEEN CREATED");
 					signUp.closeForm();
 					JOptionPane.showMessageDialog(null, "SIGN UP SUCCESFULLY!");
-					String query1 = "insert into `account` values (?,?);";
-					String query2 = "insert into `personalInfo` values (?,?,?,?,?,?,?);";
+					String query1 = "insert into `account` values (?,?,?);";
+					String query2 = "insert into `personalInfo` values (?,?,?,?,?,?,?,?);";
 					try (PreparedStatement insertStmt = (PreparedStatement) controll.ConnectDatabase.getConnection()
 							.prepareStatement(query1)) {
 						insertStmt.setString(1, inputID);
 						insertStmt.setString(2, inputPw1);
+						insertStmt.setInt(3, 3);
 						insertStmt.executeUpdate();
 					} catch (SQLException sqlEx) {
 						sqlEx.printStackTrace();
@@ -78,6 +78,7 @@ public class SignUpController {
 						insertStmt.setString(5, null);
 						insertStmt.setString(6, null);
 						insertStmt.setString(7, null);
+						insertStmt.setInt(8, 3);
 						insertStmt.executeUpdate();
 					} catch (SQLException sqlEx) {
 						sqlEx.printStackTrace();
@@ -99,12 +100,13 @@ public class SignUpController {
 					if (signUpStatus) {
 						signUp.closeForm();
 						JOptionPane.showMessageDialog(null, "SIGN UP SUCCESFULLY!");
-						String query1 = "insert into `account` values (?,?);";
-						String query2 = "insert into `personalInfo` values (?,?,?,?,?,?,?);";
+						String query1 = "insert into `account` values (?,?,?);";
+						String query2 = "insert into `personalInfo` values (?,?,?,?,?,?,?,?);";
 						try (PreparedStatement insertStmt = (PreparedStatement) controll.ConnectDatabase.getConnection()
 								.prepareStatement(query1)) {
 							insertStmt.setString(1, inputID);
 							insertStmt.setString(2, inputPw1);
+							insertStmt.setInt(3, 3);
 							insertStmt.executeUpdate();
 						} catch (SQLException sqlEx) {
 							sqlEx.printStackTrace();
@@ -118,6 +120,7 @@ public class SignUpController {
 							insertStmt.setString(5, null);
 							insertStmt.setString(6, null);
 							insertStmt.setString(7, null);
+							insertStmt.setInt(8, 3);
 							insertStmt.executeUpdate();
 						} catch (SQLException sqlEx) {
 							sqlEx.printStackTrace();

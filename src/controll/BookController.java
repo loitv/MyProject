@@ -27,7 +27,6 @@ public class BookController {
 	public BookController() {
 		data = new Vector();
 		bookView = new BookView();
-		// String query = "select * from book;";
 		updateBook();
 		//////////////////////////////////
 		/// handle event for button Add///
@@ -42,7 +41,7 @@ public class BookController {
 
 				// Add new book or add a quantity of availble book in lirary
 				try {
-					if (bookView.getISBN() == 0 || bookView.getTitle().equals("") || bookView.getAuthor().equals("")
+					if (bookView.getISBN() == 0 || bookView.getTitleBook().equals("") || bookView.getAuthor().equals("")
 							|| bookView.getCategory().equals("") || bookView.getPrice() == 0
 							|| bookView.getQuantity() == 0) {
 						JOptionPane.showMessageDialog(null, "SOME FIELDS MUST BE FILLED!");
@@ -62,7 +61,7 @@ public class BookController {
 							try (PreparedStatement insertStmt = (PreparedStatement) controll.ConnectDatabase
 									.getConnection().prepareStatement(query)) {
 								insertStmt.setInt(1, bookView.getISBN());
-								insertStmt.setString(2, bookView.getTitle());
+								insertStmt.setString(2, bookView.getTitleBook());
 								insertStmt.setString(3, bookView.getAuthor());
 								insertStmt.setString(4, bookView.getCategory());
 								insertStmt.setDouble(5, bookView.getPrice());
@@ -121,7 +120,7 @@ public class BookController {
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
 				try {
-					if (bookView.getTitle().equals("") || bookView.getAuthor().equals("")
+					if (bookView.getTitleBook().equals("") || bookView.getAuthor().equals("")
 							|| bookView.getCategory().equals("") || bookView.getPrice() == 0) {
 						JOptionPane.showMessageDialog(null, "SOME FIELDS MUST BE FILLED!");
 					} else {
@@ -129,7 +128,7 @@ public class BookController {
 						try (PreparedStatement addStmt = (PreparedStatement) controll.ConnectDatabase.getConnection()
 								.prepareStatement(query1)) {
 
-							addStmt.setString(1, bookView.getTitle());
+							addStmt.setString(1, bookView.getTitleBook());
 							addStmt.setString(2, bookView.getAuthor());
 							addStmt.setString(3, bookView.getCategory());
 							addStmt.setDouble(4, bookView.getPrice());

@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.util.Vector;
@@ -38,8 +39,8 @@ public class BookView extends JFrame {
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public BookView() {
-		super("Book Management");
-		setSize(970, 600);
+//		super("Book Management");
+//		setSize(970, 600);
 		setLayout(new BorderLayout(5, 5));
 
 		lbISBN = new JLabel("ISBN");
@@ -112,6 +113,10 @@ public class BookView extends JFrame {
 		panel3.add(btnDelete);
 		add(panel3, BorderLayout.SOUTH);
 
+		setTitle("BOOK MANAGEMENT");
+		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icon/b5.png")));
+		setSize(970, 600);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setVisible(true);
 	}
@@ -141,7 +146,7 @@ public class BookView extends JFrame {
 		}
 	}
 
-	public String getTitle() {
+	public String getTitleBook() {
 		return tfTitle.getText();
 	}
 

@@ -109,7 +109,6 @@ public class PatternBorrowController {
 					}
 				}
 				if (a == readerIDList.size()) {
-					// System.out.println("New Account!");
 					PromptSupport.uninstall(patternbv.getTfReaderName());
 					patternbv.getTfReaderName().setText("");
 				} else {
@@ -326,12 +325,13 @@ public class PatternBorrowController {
 								}
 
 								if (b == readerIDList.size()) { // New Account
-									String query1 = "insert into account values (?,?);";
-									String query2 = "insert into `personalInfo` values (?,?,?,?,?,?,?);";
+									String query1 = "insert into account values (?,?,?);";
+									String query2 = "insert into `personalInfo` values (?,?,?,?,?,?,?,?);";
 									try (PreparedStatement insertStmt = (PreparedStatement) controll.ConnectDatabase
 											.getConnection().prepareStatement(query1)) {
 										insertStmt.setString(1, readerID);
 										insertStmt.setString(2, "000");
+										insertStmt.setInt(3, 3);
 										insertStmt.executeUpdate();
 									} catch (Exception ex) {
 										ex.printStackTrace();
@@ -345,6 +345,7 @@ public class PatternBorrowController {
 										insertStmt.setString(5, null);
 										insertStmt.setString(6, null);
 										insertStmt.setString(7, null);
+										insertStmt.setInt(8, 3);
 										insertStmt.executeUpdate();
 									} catch (Exception ex) {
 										ex.printStackTrace();
@@ -392,7 +393,7 @@ public class PatternBorrowController {
 						JOptionPane.showMessageDialog(null, "CANNOT ADD!");
 					} else {
 						insertStmt.setInt(1, patternbv.getISBN());
-						insertStmt.setString(2, patternbv.getTitle());
+						insertStmt.setString(2, patternbv.getTitleBook());
 						insertStmt.setDouble(3, patternbv.getPrice());
 						insertStmt.executeUpdate();
 						updateTempBookTable();
@@ -571,7 +572,7 @@ public class PatternBorrowController {
 		ArrayList<String> readerIDList = new ArrayList<String>();
 		// int a = 0;
 		try {
-			String query = "select * from account;";
+			String query = "select * from account where type = 3;";
 			statement = controll.ConnectDatabase.getConnection().createStatement();
 			ResultSet rs = statement.executeQuery(query);
 			if (!rs.first()) {

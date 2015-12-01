@@ -26,7 +26,8 @@ public class ReaderInfoController {
 
 	public ReaderInfoController() {
 		readeriv = new ReadInfoView();
-		updateTable("select * from personalInfo where (personalID not like 'Librarian') and (personalID not like 'Admin');");
+		readeriv.getBtnBorInfo().setEnabled(false);
+		updateTable("select * from personalInfo where type = 3;");
 
 		// Add items into ComboBox
 
@@ -61,9 +62,10 @@ public class ReaderInfoController {
 					id = readeriv.getSelectedID();
 					String query;
 					if (id.equals("All")) {
-						query = "select * from personalInfo where (personalID not like 'Librarian') and (personalID not like 'Admin');";
+						query = "select * from personalInfo where type = 3;";
 					} else {
 						query = String.format("select * from personalInfo where personalID = '%s'", id);
+						readeriv.getBtnBorInfo().setEnabled(true);
 					}
 					data = new Vector();
 					updateTable(query); // Update Book information on table
@@ -103,8 +105,8 @@ public class ReaderInfoController {
 				// TODO Auto-generated method stub
 				int n = readeriv.getReaderInfoTable().getSelectedRow();
 				if (n!=-1) {
-//					readeriv.getCbReaderID().setSelectedItem(readeriv.getReaderInfoTable().getValueAt(n, 0).toString());
 					id = readeriv.getReaderInfoTable().getValueAt(n, 0).toString();
+					readeriv.getBtnBorInfo().setEnabled(true);
 				}
 			}
 		});
@@ -113,12 +115,8 @@ public class ReaderInfoController {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				System.out.println(id);
-				try {
-					String query = "";
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
+//				System.out.println(id);
+				new ReaderBorrowingInfoController(id);
 			}
 		});
 
@@ -134,7 +132,7 @@ public class ReaderInfoController {
 			ResultSet rs = statement.executeQuery(query);
 			if (!rs.first()) {
 				JOptionPane.showMessageDialog(null, "HAVE NO RECORD");
-				updateTable("select * from personalInfo where (personalID not like 'Librarian') and (personalID not like 'Admin');");
+				updateTable("select * from personalInfo where type = 3;");
 			} else {
 				do {
 					String id = rs.getString("personalID");

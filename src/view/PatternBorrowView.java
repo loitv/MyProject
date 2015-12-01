@@ -22,14 +22,14 @@ import model.DateLabelFormatter;
 
 public class PatternBorrowView extends JFrame {
 	private static final long serialVersionUID = 1L;
-	private JPanel panel1 = new JPanel();
+//	private JPanel panel1 = new JPanel();
 	private JLabel lbPatternID, lbISBN, lbBorrowingDate, lbReaderID, lbReaderName, lbTitle,lbPrice, lbReturnDate;
 	private JTextField tfPatternID, tfReaderID, tfReaderName, tfISBN, tfTittle, tfPrice;
 
-	private JScrollPane scrollPanel = new JScrollPane();
+//	private JScrollPane scrollPanel = new JScrollPane();
 	private JTable paternBorrowDetails;
 
-	private JPanel panel3 = new JPanel();
+//	private JPanel panel3 = new JPanel();
 	private JButton btnAdd, btnDelete, btnCreatePattern, btnRemoveBook;
 
 	private JDatePickerImpl datePickerBorrow, datePickerReturn;
@@ -42,6 +42,8 @@ public class PatternBorrowView extends JFrame {
 		setSize(1270, 600);
 		setLayout(new BorderLayout(5, 5));
 
+		JPanel panel1 = new JPanel();
+		panel1.setLayout(new GridLayout(4, 6, 5, 10));
 		lbPatternID = new JLabel("Pattern ID");
 		lbPatternID.setForeground(Color.blue);
 		lbISBN = new JLabel("ISBN");
@@ -61,7 +63,6 @@ public class PatternBorrowView extends JFrame {
 
 		tfPatternID = new JTextField(30);
 		tfReaderID = new JTextField(30);
-//		tfReaderID.addVetoableChangeListener();
 		tfISBN = new JTextField(30);
 		tfTittle = new JTextField(30);
 		tfReaderName = new JTextField(30);
@@ -77,8 +78,6 @@ public class PatternBorrowView extends JFrame {
 		JDatePanelImpl datePanel2 = new JDatePanelImpl(model2, property);
 		datePickerReturn = new JDatePickerImpl(datePanel2, new DateLabelFormatter());
 
-		panel1 = new JPanel();
-		panel1.setLayout(new GridLayout(4, 6, 5, 10));
 		panel1.add(lbPatternID);
 		panel1.add(tfPatternID);
 		panel1.add(lbISBN);
@@ -119,10 +118,10 @@ public class PatternBorrowView extends JFrame {
 		paternBorrowDetails = new JTable(data, colsName);
 		paternBorrowDetails.setPreferredScrollableViewportSize(new Dimension(500, 100));
 		paternBorrowDetails.setFillsViewportHeight(true);
-		scrollPanel = new JScrollPane(paternBorrowDetails);
+		JScrollPane scrollPanel = new JScrollPane(paternBorrowDetails);
 		add(scrollPanel, BorderLayout.CENTER);
 
-		panel3 = new JPanel();
+		JPanel panel3 = new JPanel();
 		panel3.setLayout(new GridLayout(1, 3, 5, 10));
 		btnAdd = new JButton("Add book");
 		btnDelete = new JButton("Delete Pattern");
@@ -217,7 +216,7 @@ public class PatternBorrowView extends JFrame {
 		}
 	}
 
-	public String getTitle() {
+	public String getTitleBook() {
 		return tfTittle.getText();
 	}
 
