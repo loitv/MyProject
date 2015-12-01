@@ -36,6 +36,7 @@ public class PersonalInformationView extends JFrame {
 		super("Personal Information");
 		setSize(900, 450);
 		setLayout(new BorderLayout(5, 5));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icon/perInfo1.png")));
 
 		JPanel panel1 = new JPanel();
 		panel1.setLayout(new GridLayout(5, 2, 10, 10));
@@ -109,8 +110,9 @@ public class PersonalInformationView extends JFrame {
 		add(scrollPanel, BorderLayout.CENTER);
 
 		btnUpdate = new JButton("Update Information");
+		btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/btnUpdate.png")));
 		add(btnUpdate, BorderLayout.SOUTH);
-
+		
 		setLocationRelativeTo(null);
 		setVisible(true);
 	}
@@ -195,6 +197,9 @@ public class PersonalInformationView extends JFrame {
 	}
 	public JLabel getLbIDName() {
 		return lbIDName;
+	}
+	public JComboBox<String> getCbGen() {
+		return cbGender;
 	}
 	public static void main(String[] args) {
 		new PersonalInformationView();

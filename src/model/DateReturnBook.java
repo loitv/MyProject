@@ -1,30 +1,26 @@
 package model;
 
 import java.util.Calendar;
-import java.util.Date;
-import java.text.SimpleDateFormat;
+//import java.util.Date;
+//import java.text.SimpleDateFormat;
 
 public class DateReturnBook {
-	
+
 	// public static final String DATE_FORMAT_NOW = "yyyy-MM-dd";
 
-//	public static void main(String[] args)
-	public static String DateReturnBook()
+	// public static void main(String[] args)
+	public DateReturnBook()
 
 	{
 		Calendar DateBorrow = Calendar.getInstance();
 
-		SimpleDateFormat ft = new SimpleDateFormat("dd-MM-yyyy");
-		
-		Date now = new Date();
-		
-		//System.out.println("Borrow Book Date: " + ft.format(now));
+		// SimpleDateFormat ft = new SimpleDateFormat("dd-MM-yyyy");
 
-		String day = ft.format(DateBorrow.getTime());
+		// System.out.println("Borrow Book Date: " + ft.format(now));
 
 		DateBorrow.add(Calendar.MONTH, 6);
-		return ft.format(DateBorrow.getTime());
-		//System.out.println("Return Book Date: " + six_month);
+		// return ft.format(DateBorrow.getTime());
+		// System.out.println("Return Book Date: " + six_month);
 
 	}
 

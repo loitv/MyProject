@@ -11,13 +11,10 @@ import java.awt.event.ItemListener;
 import java.util.Vector;
 
 import javax.swing.*;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
-/**
- * @author CST The TimKiemSach class display the form TimKiemSach the user
- *         manipulation on interface
- */
 @SuppressWarnings("serial")
 public class SearchBookView extends JFrame {
 	private JTextField tfBook;
@@ -37,7 +34,7 @@ public class SearchBookView extends JFrame {
 		lbBook.setForeground(Color.blue);
 		tfBook = new JTextField(15);
 		btnSearch = new JButton("Search");
-		btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/c1.png")));
+		btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/search.png")));
 		lbCategory = new JLabel("Category");
 		lbCategory.setForeground(Color.blue);
 		cbCategory = new JComboBox<String>();
@@ -84,6 +81,12 @@ public class SearchBookView extends JFrame {
 	public void setTfBookAL(ActionListener al) {
 		this.tfBook.addActionListener(al);
 	}
+	public void setTfBookDL(DocumentListener dl) {
+		this.tfBook.getDocument().addDocumentListener(dl);
+	}
+	public JTextField getTfBook() {
+		return tfBook;
+	}
 
 	public void addItemToComboBox(String name) {
 		DefaultComboBoxModel<String> model = (DefaultComboBoxModel<String>) cbCategory.getModel();
@@ -111,7 +114,6 @@ public class SearchBookView extends JFrame {
 		cols.addElement("Author");
 		cols.addElement("Category");
 		cols.addElement("Price");
-//		cols.addElement("Quantity");
 		model = new DefaultTableModel(list, cols);
 		searchBook.setModel(model);
 		searchBook.repaint();

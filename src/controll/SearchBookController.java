@@ -10,6 +10,8 @@ import java.sql.Statement;
 import java.util.Vector;
 
 import javax.swing.JOptionPane;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 import view.SearchBookView;
 
@@ -21,9 +23,9 @@ public class SearchBookController {
 
 	public SearchBookController() {
 		searchBookView = new SearchBookView();
-		//DISPLAY ALL BOOK//
+		// DISPLAY ALL BOOK//
 		displayBook("select * from book;");
-		
+
 		/////////////////////////////
 		/// Add Items into ComboBox///
 		/////////////////////////////
@@ -101,6 +103,30 @@ public class SearchBookController {
 				}
 			}
 
+		});
+
+		///////////////////
+		searchBookView.setTfBookDL(new DocumentListener() {
+
+			@Override
+			public void removeUpdate(DocumentEvent arg0) {
+				// TODO Auto-generated method stub
+				if (searchBookView.getTfBook().getText().equals("")) {
+					displayBook("select * from `book`;");
+				}
+			}
+
+			@Override
+			public void insertUpdate(DocumentEvent arg0) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void changedUpdate(DocumentEvent arg0) {
+				// TODO Auto-generated method stub
+
+			}
 		});
 	}
 

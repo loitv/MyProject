@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.util.Properties;
@@ -22,14 +23,11 @@ import model.DateLabelFormatter;
 
 public class PatternBorrowView extends JFrame {
 	private static final long serialVersionUID = 1L;
-//	private JPanel panel1 = new JPanel();
 	private JLabel lbPatternID, lbISBN, lbBorrowingDate, lbReaderID, lbReaderName, lbTitle,lbPrice, lbReturnDate;
 	private JTextField tfPatternID, tfReaderID, tfReaderName, tfISBN, tfTittle, tfPrice;
 
-//	private JScrollPane scrollPanel = new JScrollPane();
 	private JTable paternBorrowDetails;
 
-//	private JPanel panel3 = new JPanel();
 	private JButton btnAdd, btnDelete, btnCreatePattern, btnRemoveBook;
 
 	private JDatePickerImpl datePickerBorrow, datePickerReturn;
@@ -38,8 +36,9 @@ public class PatternBorrowView extends JFrame {
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public PatternBorrowView() {
-		super("Borrow Book Management");
+		super("Borrowing Book Management");
 		setSize(1270, 600);
+		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icon/createpattern1.png")));
 		setLayout(new BorderLayout(5, 5));
 
 		JPanel panel1 = new JPanel();
@@ -127,6 +126,10 @@ public class PatternBorrowView extends JFrame {
 		btnDelete = new JButton("Delete Pattern");
 		btnCreatePattern = new JButton("Create New Pattern");
 		btnRemoveBook = new JButton("Remove book");
+		btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/btnAdd1.png")));
+		btnRemoveBook.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/btnRemove.png")));
+		btnCreatePattern.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/btnAdd.png")));
+		btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/btnDelete.png")));
 		panel3.add(btnAdd);
 		panel3.add(btnRemoveBook);
 		panel3.add(btnCreatePattern);

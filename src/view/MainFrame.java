@@ -27,24 +27,42 @@ public class MainFrame extends JFrame {
 
 		menuBar = new JMenuBar();
 		menu = new JMenu("Account");
+		menu.setIcon(new javax.swing.ImageIcon(getClass().getResource(
+				"/Icon/account.png")));
 		login = new JMenuItem("Login");
+		login.setIcon(new javax.swing.ImageIcon(getClass().getResource(
+				"/Icon/login.png")));
 		signUp = new JMenuItem("Sign up");
+		signUp.setIcon(new javax.swing.ImageIcon(getClass().getResource(
+				"/Icon/signup.png")));
 		menu.add(login);
 		menu.add(signUp);
 		menuBar.add(menu);
 
+		menu = new JMenu("Management");
+		menu.setIcon(new javax.swing.ImageIcon(getClass().getResource(
+				"/Icon/manaMenu.png")));
+		menuBar.add(menu);
+
 		menu = new JMenu("Book");
+		menu.setIcon(new javax.swing.ImageIcon(getClass().getResource(
+				"/Icon/Bookmenu.png")));
 		searchBook = new JMenuItem("Search Book");
+		searchBook.setIcon(new javax.swing.ImageIcon(getClass().getResource(
+				"/Icon/searchB.png")));
 		menu.add(searchBook);
 		allBook = new JMenuItem("All Books");
+		allBook.setIcon(new javax.swing.ImageIcon(getClass().getResource(
+				"/Icon/allbook2.png")));
 		menu.add(allBook);
 		menuBar.add(menu);
-
-		menu = new JMenu("Management");
-		menuBar.add(menu);
-
+		
 		menu = new JMenu("Help");
+		menu.setIcon(new javax.swing.ImageIcon(getClass().getResource(
+				"/Icon/help.png")));
 		aboutUs = new JMenuItem("About Us");
+		aboutUs.setIcon(new javax.swing.ImageIcon(getClass().getResource(
+				"/Icon/aboutus1.png")));
 		menu.add(aboutUs);
 		menuBar.add(menu);
 
@@ -54,7 +72,7 @@ public class MainFrame extends JFrame {
 		cp.add(panel, BorderLayout.CENTER);
 
 		setTitle("LIBRARY MANAGEMENT");
-		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icon/b5.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icon/library.png")));
 		setSize(970, 600);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
@@ -93,6 +111,7 @@ public class MainFrame extends JFrame {
 	// Add user's name into Menu bar
 	public void addAccount(String name) {
 		logout = new JMenuItem("Logout");
+		logout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/logout1.png")));
 		menu = menuBar.getMenu(0);
 		menu.setText(name);
 		menu.setForeground(Color.RED);
@@ -105,8 +124,12 @@ public class MainFrame extends JFrame {
 	// add reader management list when a reader login
 	public void addReaderManagement() {
 		readerInfo = new JMenuItem("Personal Information");
+		readerInfo.setIcon(new javax.swing.ImageIcon(getClass().getResource(
+				"/Icon/perInfo1.png")));
 		borrowBookInfo = new JMenuItem("Books You Brorrowed");
-		menu = menuBar.getMenu(2);
+		borrowBookInfo.setIcon(new javax.swing.ImageIcon(getClass().getResource(
+				"/Icon/borrowbooks.png")));
+		menu = menuBar.getMenu(1);
 		menu.add(borrowBookInfo);
 		menu.add(readerInfo);
 	}
@@ -121,10 +144,18 @@ public class MainFrame extends JFrame {
 	// add librarian management list when a Librarian login
 	public void addLibrarianManagement() {
 		libBookManagement = new JMenuItem("Book Management");
+		libBookManagement.setIcon(new javax.swing.ImageIcon(getClass().getResource(
+				"/Icon/bookManaMenu.png")));
 		libCreatePattern = new JMenuItem("Create New Pattern Borrow");
+		libCreatePattern.setIcon(new javax.swing.ImageIcon(getClass().getResource(
+				"/Icon/createpattern1.png")));
 		libReaderInfo = new JMenuItem("Reader Information");
+		libReaderInfo.setIcon(new javax.swing.ImageIcon(getClass().getResource(
+				"/Icon/perInfo.png")));
 		librarianInfo = new JMenuItem("Personal Information");
-		menu = menuBar.getMenu(2);
+		librarianInfo.setIcon(new javax.swing.ImageIcon(getClass().getResource(
+				"/Icon/perInfo1.png")));
+		menu = menuBar.getMenu(1);
 		menu.add(libBookManagement);
 		menu.add(libCreatePattern);
 		menu.add(libReaderInfo);
@@ -149,10 +180,18 @@ public class MainFrame extends JFrame {
 	//adBookManagement, adLibManagerment, adInfo
 		public void addAdminManagement() {
 			adBookManagement = new JMenuItem("Book Management");
-			adLibManagerment = new JMenuItem("Librarian");
+			adBookManagement.setIcon(new javax.swing.ImageIcon(getClass().getResource(
+					"/Icon/bookManaMenu.png")));
+			adLibManagerment = new JMenuItem("Librarian Management");
+			adLibManagerment.setIcon(new javax.swing.ImageIcon(getClass().getResource(
+					"/Icon/libInfo.png")));
 			adReaderInfo = new JMenuItem("Reader Management");
+			adReaderInfo.setIcon(new javax.swing.ImageIcon(getClass().getResource(
+					"/Icon/perInfo.png")));
 			adInfo = new JMenuItem("Personal Information");
-			menu = menuBar.getMenu(2);
+			adInfo.setIcon(new javax.swing.ImageIcon(getClass().getResource(
+					"/Icon/perInfo1.png")));
+			menu = menuBar.getMenu(1);
 			menu.add(adBookManagement);
 			menu.add(adLibManagerment);
 			menu.add(adReaderInfo);

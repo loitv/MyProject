@@ -1,8 +1,10 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseListener;
@@ -34,14 +36,17 @@ public class ReadInfoView extends JFrame {
 	public ReadInfoView() {
 		super("Reader Information");
 		setSize(1100, 550);
+		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icon/perinfo.png")));
 		setLayout(new BorderLayout(5, 10));
 
 		JPanel panel1 = new JPanel();
 		panel1.setLayout(new GridLayout(1, 4, 5, 10));
 		lbReaderID = new JLabel("Reader ID");
+		lbReaderID.setForeground(Color.BLUE);
 		cbReaderID = new JComboBox<String>();
 		cbReaderID.addItem("All");
 		btnBorInfo = new JButton("Reader Borrowing Information");
+		btnBorInfo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/btnBorInfo.png")));
 		panel1.add(lbReaderID);
 		panel1.add(cbReaderID);
 		panel1.add(btnBorInfo);

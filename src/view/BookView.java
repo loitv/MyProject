@@ -39,8 +39,6 @@ public class BookView extends JFrame {
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public BookView() {
-//		super("Book Management");
-//		setSize(970, 600);
 		setLayout(new BorderLayout(5, 5));
 
 		lbISBN = new JLabel("ISBN");
@@ -106,15 +104,21 @@ public class BookView extends JFrame {
 		panel3 = new JPanel();
 		panel3.setLayout(new GridLayout(1, 3, 5, 10));
 		btnAdd = new JButton("Add");
+		btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource(
+				"/Icon/btnAdd.png")));
 		btnEdit = new JButton("Edit");
+		btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource(
+				"/Icon/btnEdit.png")));
 		btnDelete = new JButton("Delete");
+		btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource(
+				"/Icon/btnDelete.png")));
 		panel3.add(btnAdd);
 		panel3.add(btnEdit);
 		panel3.add(btnDelete);
 		add(panel3, BorderLayout.SOUTH);
 
 		setTitle("BOOK MANAGEMENT");
-		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icon/b5.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icon/bookView.png")));
 		setSize(970, 600);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);

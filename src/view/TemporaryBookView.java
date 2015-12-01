@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.util.Vector;
 
 import javax.swing.JFrame;
@@ -20,6 +21,7 @@ public class TemporaryBookView extends JFrame{
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public TemporaryBookView() {
 		super("Temporary Books");
+		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icon/book3.png")));
 		Vector colName = new Vector();
 		colName.addElement("ISBN");
 		colName.addElement("Title");

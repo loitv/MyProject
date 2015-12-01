@@ -1,5 +1,7 @@
 package view;
 
+import java.awt.Toolkit;
+
 import javax.swing.*;
 
 public class AboutUsView extends JFrame{
@@ -13,7 +15,7 @@ public class AboutUsView extends JFrame{
 	public AboutUsView() {
 		super("About Us");
 		setSize(370,200);
-		
+		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icon/aboutus1.png")));
 		content = new JTextArea();
 		String aboutUs = "Product Version: 1.0.0\n\n"
 				+ "Group Author:    Tran Van Loi"

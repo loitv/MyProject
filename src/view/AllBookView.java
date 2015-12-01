@@ -58,7 +58,7 @@ public class AllBookView extends JFrame {
 		scrollPane = new JScrollPane(bookDetail);
 		add(scrollPane, BorderLayout.CENTER);
 
-		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icon/allBook.jpg")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icon/allbookView.jpg")));
 		setSize(970, 600);
 		dispose();
 		setLocationRelativeTo(null);

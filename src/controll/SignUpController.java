@@ -89,7 +89,7 @@ public class SignUpController {
 						// password = rs.getString("password");
 
 						signUpStatus = true;
-						if (user.equals(inputID)) {
+						if (user.equalsIgnoreCase(inputID)) {
 							String displayContent = "ACCOUNT ".concat(inputID.toUpperCase())
 									.concat(" HAS BEEN EXISTED");
 							JOptionPane.showMessageDialog(null, displayContent);

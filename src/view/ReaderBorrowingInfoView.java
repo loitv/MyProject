@@ -4,10 +4,13 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemListener;
 import java.util.Vector;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -30,12 +33,14 @@ public class ReaderBorrowingInfoView extends JFrame {
 	private JTextField tfBorrowDate, tfReturnDate, tfDeposit;
 	private JComboBox<Integer> cbPatternID;
 	private JTable patternInfo;
+	private JButton exportPattern;
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public ReaderBorrowingInfoView() {
 		super("Reader Borrowing Information");
 		setSize(750, 550);
-		setLayout(new BorderLayout(5, 10));
+		setLayout(new BorderLayout(5, 5));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icon/borrowbooks.png")));
 
 		JPanel panel1 = new JPanel();
 		panel1.setLayout(new GridLayout(5, 4, 5, 10));
@@ -57,11 +62,9 @@ public class ReaderBorrowingInfoView extends JFrame {
 		lbDeposit.setForeground(Color.BLUE);
 		lbBook = new JLabel("BOOKS");
 		lbBook.setForeground(Color.BLUE);
-		// lbBook.setFont(calibri);;
 		tfBorrowDate = new JTextField();
 		tfReturnDate = new JTextField();
 		tfDeposit = new JTextField();
-//		tfReaderName = new JTextField();
 		panel1.add(lbReaderID1);
 		panel1.add(lbReaderID2);
 		panel1.add(lbReaderName);
@@ -84,14 +87,16 @@ public class ReaderBorrowingInfoView extends JFrame {
 		Vector cols = new Vector();
 		cols.addElement("ISBN");
 		cols.addElement("Title");
-//		cols.addElement("Price");
 		Vector data = new Vector();
-		// patternInfo.add(comp, index)
 		patternInfo = new JTable(data, cols);
 		patternInfo.setPreferredScrollableViewportSize(new Dimension(500, 100));
 		patternInfo.setFillsViewportHeight(true);
 		JScrollPane scrollPanel = new JScrollPane(patternInfo);
 		add(scrollPanel, BorderLayout.CENTER);
+		
+		exportPattern = new JButton("Export Pattern");
+		exportPattern.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/btnExport.png")));
+		add(exportPattern, BorderLayout.SOUTH);
 
 		setLocationRelativeTo(null);
 		setVisible(true);
@@ -133,6 +138,9 @@ public class ReaderBorrowingInfoView extends JFrame {
 	public void addItemToComboBox(int patternID) {
 		DefaultComboBoxModel<Integer> model = (DefaultComboBoxModel<Integer>) cbPatternID.getModel();
 		model.addElement(patternID);
+	}
+	public void setexportPatternActionListener(ActionListener al) {
+		this.exportPattern.addActionListener(al);
 	}
 	
 	//REFRESH TABLE

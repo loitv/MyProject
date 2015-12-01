@@ -2,6 +2,7 @@ package view;
 
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
@@ -26,6 +27,7 @@ public class SignUpView extends JFrame{
 		
 		setTitle("Sign Up");
 		setSize(280, 150);
+		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icon/signup.png")));
 		setResizable(false);
 		setLocationRelativeTo(null);
 		setLayout(new FlowLayout());
@@ -45,7 +47,7 @@ public class SignUpView extends JFrame{
 		signUpPanel.add(rePwField);
 		
 		btnSignUp = new JButton("Sign Up");
-		
+		btnSignUp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/btnsignup1.png")));
 		add(signUpPanel);
 		add(btnSignUp);
 		

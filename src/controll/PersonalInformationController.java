@@ -40,6 +40,7 @@ public class PersonalInformationController {
 				
 				try { // get informations from table and set them to TextField for editing and updating 
 					personalInfo.getTfName().setText(personalInfo.getTable().getValueAt(0, 0).toString());
+					personalInfo.getCbGen().setSelectedItem(personalInfo.getTable().getValueAt(0, 1));
 					personalInfo.getTfEmail().setText(personalInfo.getTable().getValueAt(0, 5).toString());
 					personalInfo.getTfAddress().setText(personalInfo.getTable().getValueAt(0, 3).toString());
 					personalInfo.getTfPhone().setText(personalInfo.getTable().getValueAt(0, 2).toString());

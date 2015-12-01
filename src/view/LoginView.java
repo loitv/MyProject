@@ -3,6 +3,7 @@ package view;
 import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
@@ -34,14 +35,16 @@ public class LoginView extends JFrame {
 		loginPanel.add(lbPassword);
 		loginPanel.add(pwField);
 		btnLogin = new JButton("Login");
+		btnLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/btnlogin.png")));
 		// Setup the content-pane of JFrame in BorderLayout
 		Container cp = this.getContentPane();
 		cp.setLayout(new FlowLayout());
 		cp.add(loginPanel);
 		cp.add(btnLogin);
 
-		setTitle("Log in");
+		setTitle("Login");
 		setSize(280, 130);
+		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icon/login.png")));
 		setLocationRelativeTo(null);
 		setVisible(true);
 		setResizable(false);
