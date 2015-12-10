@@ -160,6 +160,7 @@ public class LibrarianManagerController {
 					} catch (SQLException ex) {
 						ex.printStackTrace();
 					}
+					libmv.getTfID().setEditable(true);
 				}
 			}
 		});

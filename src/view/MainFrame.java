@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
+
 import javax.swing.*;
 
 public class MainFrame extends JFrame {
@@ -22,7 +23,7 @@ public class MainFrame extends JFrame {
 	public MainFrame() {
 		JPanel panel = new JPanel(new BorderLayout());
 		JLabel lb = new JLabel();
-		lb.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/main.jpg")));
+		lb.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/main1.jpg")));
 		panel.add(lb, BorderLayout.CENTER);
 
 		menuBar = new JMenuBar();
@@ -80,10 +81,7 @@ public class MainFrame extends JFrame {
 		setResizable(false);
 	}
 
-	public MainFrame(int number) {
-
-	}
-
+	// set ActionListenr for components
 	public void setLoginActionListener(ActionListener listener) {
 		this.login.addActionListener(listener);
 	}

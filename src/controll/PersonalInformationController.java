@@ -22,12 +22,12 @@ public class PersonalInformationController {
 	private Statement statement;
 
 	// constructor
-	@SuppressWarnings({ })
+	@SuppressWarnings({})
 	public PersonalInformationController(String personalID) {
-		
+
 		personalInfo = new PersonalInformationView();
 		personalInfo.setIDName(personalID);
-		
+
 		// show table information
 		updateTable(personalID);
 
@@ -37,14 +37,15 @@ public class PersonalInformationController {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				
-				try { // get informations from table and set them to TextField for editing and updating 
+
+				try { // get informations from table and set them to TextField
+						// for editing and updating
 					personalInfo.getTfName().setText(personalInfo.getTable().getValueAt(0, 0).toString());
 					personalInfo.getCbGen().setSelectedItem(personalInfo.getTable().getValueAt(0, 1));
 					personalInfo.getTfEmail().setText(personalInfo.getTable().getValueAt(0, 5).toString());
 					personalInfo.getTfAddress().setText(personalInfo.getTable().getValueAt(0, 3).toString());
 					personalInfo.getTfPhone().setText(personalInfo.getTable().getValueAt(0, 2).toString());
-					
+
 				} catch (NullPointerException ex) {
 					System.out.println("Doesn't have values");
 				}
@@ -82,14 +83,12 @@ public class PersonalInformationController {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				
-				if (personalInfo.getName().equals("")&
-						personalInfo.getAddress().equals("")&
-						personalInfo.getEmail().equals("")&
-						personalInfo.getPhone() == 0) {
+
+				if (personalInfo.getName().equals("") || personalInfo.getAddress().equals("")
+						|| personalInfo.getEmail().equals("") || personalInfo.getPhone() == 0) {
 					JOptionPane.showMessageDialog(null, "CANNOT UPDATE!");
-					
-				}else {
+
+				} else {
 					String query = "UPDATE personalInfo SET name=? ,gender=?,phone=?,address=?, dateofbirth=?, email=? WHERE personalID=?";
 					try (PreparedStatement addStmt = (PreparedStatement) controll.ConnectDatabase.getConnection()
 							.prepareStatement(query)) {
@@ -106,13 +105,23 @@ public class PersonalInformationController {
 					} catch (SQLException ex) {
 						ex.printStackTrace();
 					}
-				}
-				
-				personalInfo.getTfName().setText("");
-				personalInfo.getTfPhone().setText("");
-				personalInfo.getTfAddress().setText("");
-				personalInfo.getTfEmail().setText("");
 
+					String query1 = "UPDATE patternBorrow SET readerName=? WHERE readerID=?";
+					try (PreparedStatement addStmt = (PreparedStatement) controll.ConnectDatabase.getConnection()
+							.prepareStatement(query1)) {
+
+						addStmt.setString(1, personalInfo.getName());
+						addStmt.setString(2, personalID);
+						addStmt.executeUpdate();
+
+					} catch (SQLException ex) {
+						ex.printStackTrace();
+					}
+					personalInfo.getTfName().setText("");
+					personalInfo.getTfPhone().setText("");
+					personalInfo.getTfAddress().setText("");
+					personalInfo.getTfEmail().setText("");
+				}
 				// Update
 				updateTable(personalID);
 

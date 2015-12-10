@@ -448,23 +448,27 @@ public class PatternBorrowController {
 				if (patternID == 0) {
 					JOptionPane.showMessageDialog(null, "PATTERN'S ID FIELD IS EMPTY!");
 				} else {
-					String query1 = "delete from patternborrow where patternID = ?";
-					String query2 = "delete from pattern_book where patternID = ?";
-					try (PreparedStatement insertStmt = (PreparedStatement) controll.ConnectDatabase.getConnection()
-							.prepareStatement(query1)) {
-						insertStmt.setInt(1, patternID);
-						insertStmt.executeUpdate();
-					} catch (Exception ex) {
-						ex.printStackTrace();
+					int k = JOptionPane.showConfirmDialog(null, "Are you sure to delete this pattern?",
+							"Warning", JOptionPane.YES_NO_OPTION);
+					if (k == 0) {
+						String query1 = "delete from patternborrow where patternID = ?";
+						String query2 = "delete from pattern_book where patternID = ?";
+						try (PreparedStatement insertStmt = (PreparedStatement) controll.ConnectDatabase.getConnection()
+								.prepareStatement(query1)) {
+							insertStmt.setInt(1, patternID);
+							insertStmt.executeUpdate();
+						} catch (Exception ex) {
+							ex.printStackTrace();
+						}
+						try (PreparedStatement insertStmt = (PreparedStatement) controll.ConnectDatabase.getConnection()
+								.prepareStatement(query2)) {
+							insertStmt.setInt(1, patternID);
+							insertStmt.executeUpdate();
+						} catch (Exception ex) {
+							ex.printStackTrace();
+						}
+						updateTable();
 					}
-					try (PreparedStatement insertStmt = (PreparedStatement) controll.ConnectDatabase.getConnection()
-							.prepareStatement(query2)) {
-						insertStmt.setInt(1, patternID);
-						insertStmt.executeUpdate();
-					} catch (Exception ex) {
-						ex.printStackTrace();
-					}
-					updateTable();
 				}
 			}
 		});

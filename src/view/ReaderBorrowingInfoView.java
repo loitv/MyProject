@@ -29,11 +29,12 @@ public class ReaderBorrowingInfoView extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JLabel lbReaderID1, lbReaderID2, lbPatternID, lbBorrowDate, lbReturndate, lbDeposit, lbBook, lbReaderName, lbReaderName1;
+	private JLabel lbReaderID1, lbReaderID2, lbPatternID, lbBorrowDate, lbReturndate, lbDeposit, lbBook, lbReaderName,
+			lbReaderName1;
 	private JTextField tfBorrowDate, tfReturnDate, tfDeposit;
 	private JComboBox<Integer> cbPatternID;
 	private JTable patternInfo;
-	private JButton exportPattern;
+	private JButton exportPattern, openFile;
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public ReaderBorrowingInfoView() {
@@ -93,10 +94,16 @@ public class ReaderBorrowingInfoView extends JFrame {
 		patternInfo.setFillsViewportHeight(true);
 		JScrollPane scrollPanel = new JScrollPane(patternInfo);
 		add(scrollPanel, BorderLayout.CENTER);
-		
+
+		JPanel panel3 = new JPanel();
+		panel3.setLayout(new GridLayout(1, 2, 5, 5));
 		exportPattern = new JButton("Export Pattern");
 		exportPattern.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/btnExport.png")));
-		add(exportPattern, BorderLayout.SOUTH);
+		openFile = new JButton("Open File");
+		openFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/btnOpen.png")));
+		panel3.add(exportPattern);
+		panel3.add(openFile);
+		add(panel3, BorderLayout.SOUTH);
 
 		setLocationRelativeTo(null);
 		setVisible(true);
@@ -106,6 +113,7 @@ public class ReaderBorrowingInfoView extends JFrame {
 	public JLabel getLbReaderID2() {
 		return lbReaderID2;
 	}
+
 	public JLabel getLbReaderName1() {
 		return lbReaderName1;
 	}
@@ -129,21 +137,25 @@ public class ReaderBorrowingInfoView extends JFrame {
 	public JTable getPatternInfo() {
 		return patternInfo;
 	}
-	
-	//SET ACTION LISTENER
+
+	// SET ACTION LISTENER
 	public void setIDChangeListener(ItemListener il) {
 		this.cbPatternID.addItemListener(il);
 	}
-	
+
 	public void addItemToComboBox(int patternID) {
 		DefaultComboBoxModel<Integer> model = (DefaultComboBoxModel<Integer>) cbPatternID.getModel();
 		model.addElement(patternID);
 	}
+
 	public void setexportPatternActionListener(ActionListener al) {
 		this.exportPattern.addActionListener(al);
 	}
-	
-	//REFRESH TABLE
+	public void setBtnOpenFileActionListener(ActionListener al) {
+		this.openFile.addActionListener(al);
+	}
+
+	// REFRESH TABLE
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void refreshTable(Vector list) {
 		TableModel model = patternInfo.getModel();

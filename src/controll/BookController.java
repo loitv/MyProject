@@ -39,7 +39,7 @@ public class BookController {
 				ArrayList<Integer> isbnList = createListOfISBN();
 				int a = 0;
 
-				// Add new book or add a quantity of availble book in lirary
+				// Add new book or add a quantity of available book in library
 				try {
 					if (bookView.getISBN() == 0 || bookView.getTitleBook().equals("") || bookView.getAuthor().equals("")
 							|| bookView.getCategory().equals("") || bookView.getPrice() == 0
@@ -170,7 +170,7 @@ public class BookController {
 
 				ArrayList<Integer> isbnList = createListOfISBN();
 				int a = 0;
-				// Delete book or subtract a quantity of availble book in lirary
+				// Delete book or subtract a quantity of available book in library
 				try {
 					if (bookView.getISBN() == 0) {
 						JOptionPane.showMessageDialog(null, "Cannot delete caused ISBN field is empty!");

@@ -98,6 +98,7 @@ public class BookView extends JFrame {
 		bookDetails = new JTable(data, colsName);
 		bookDetails.setPreferredScrollableViewportSize(new Dimension(500, 100));
 		bookDetails.setFillsViewportHeight(true);
+		bookDetails.setAutoCreateRowSorter(true);
 		scrollPanel = new JScrollPane(bookDetails);
 		add(scrollPanel, BorderLayout.CENTER);
 
@@ -120,7 +121,6 @@ public class BookView extends JFrame {
 		setTitle("BOOK MANAGEMENT");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icon/bookView.png")));
 		setSize(970, 600);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setVisible(true);
 	}

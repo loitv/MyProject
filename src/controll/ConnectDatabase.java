@@ -9,10 +9,10 @@ import javax.swing.JOptionPane;
 public class ConnectDatabase {
 
 	static Connection conn = null;
-	static String conString = "jdbc:mysql://localhost:3306/library";
+	static String conString = "jdbc:mysql://localhost:8888/library";
 	static String driver = "com.mysql.jdbc.Driver";
-	static String userName = "root";
-	static String password = "";
+	static String userName = "Loitv";
+	static String password = "xxxx";
 
 	/**
 	 * the constructor default

@@ -29,7 +29,7 @@ public class ReadInfoView extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JLabel lbReaderID;
 	private JComboBox<String> cbReaderID;
-	private JButton btnBorInfo;
+	private JButton btnBorInfo, btnDelete;
 	private JTable readerInfo;
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -37,7 +37,7 @@ public class ReadInfoView extends JFrame {
 		super("Reader Information");
 		setSize(1100, 550);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icon/perinfo.png")));
-		setLayout(new BorderLayout(5, 10));
+		setLayout(new BorderLayout(5, 5));
 
 		JPanel panel1 = new JPanel();
 		panel1.setLayout(new GridLayout(1, 4, 5, 10));
@@ -49,7 +49,7 @@ public class ReadInfoView extends JFrame {
 		btnBorInfo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/btnBorInfo.png")));
 		panel1.add(lbReaderID);
 		panel1.add(cbReaderID);
-		panel1.add(btnBorInfo);
+		panel1.add(new JLabel());
 		panel1.add(new JLabel());
 		add(panel1, BorderLayout.NORTH);
 
@@ -68,7 +68,15 @@ public class ReadInfoView extends JFrame {
 		readerInfo.setFillsViewportHeight(true);
 		JScrollPane scrollPanel = new JScrollPane(readerInfo);
 		add(scrollPanel, BorderLayout.CENTER);
-
+		
+		JPanel panel2 = new JPanel();
+		panel2.setLayout(new GridLayout(1, 2, 5, 10));
+		btnDelete = new JButton("Delete Account");
+		btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/deleteAcc.png")));
+		panel2.add(btnBorInfo);
+		panel2.add(btnDelete);
+		add(panel2, BorderLayout.SOUTH);
+		
 		setLocationRelativeTo(null);
 		setVisible(true);
 	}
@@ -76,9 +84,15 @@ public class ReadInfoView extends JFrame {
 	public JButton getBtnBorInfo() {
 		return btnBorInfo;
 	}
+	public JButton getBtnDelete() {
+		return btnDelete;
+	}
 
 	public void setBtnBorInfoAL(ActionListener al) {
 		this.btnBorInfo.addActionListener(al);
+	}
+	public void setBtnDeleteAL(ActionListener al) {
+		this.btnDelete.addActionListener(al);
 	}
 
 	public void setReaderInfoML(MouseListener ml) {
